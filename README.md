@@ -1,0 +1,2 @@
+# GraphicsStudy
+OpenGLやゲーム関連の勉強ファイルした記録の置き場所です
