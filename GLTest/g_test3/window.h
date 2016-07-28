@@ -23,7 +23,7 @@ public:
 
 static inline vector2 operator +(const vector2 &a, const vector2 &b) { vector2 c = a; c += b; return c; }
 static inline vector2 operator -(const vector2 &a, const vector2 &b) { vector2 c = a; c -= b; return c; }
-static inline vector2 operator /(const vector2 &a, const double &b) { vector2 c = a; c /= b; return c; }
+static inline vector2 operator /(const vector2 &a, const vector2 &b) { vector2 c = a; c /= b; return c; }
 static inline bool operator ==(const vector2 &a, const vector2 &b){
 	if (a.x() == b.x() && a.y() == b.y()){
 		return true;
@@ -48,44 +48,12 @@ class Window{
 	vector2 m_scale;
 
 	//拡大率の算出
-	void UpdateScale(){
-		m_scale.set(m_s*m_iw,m_s*m_ih);
-	}
+	void UpdateScale();
 public:
-
-	//コンストラクタ
-	Window(int width, int height, const char *title) :
-		m_window(glfwCreateWindow(width, height, title, NULL, NULL))
-		, m_iw(2.0f / static_cast<GLfloat>(width))
-		, m_ih(2.0f / static_cast<GLfloat>(height))
-		, m_s(100.0f)
-	{
-		if (m_window == NULL){
-			//ウィンドウが作成できなかった
-			std::cerr << "Can't" << std::endl;
-			exit(1);
-		}
-
-		//現在のウィンドウを処理対象に
-		glfwMakeContextCurrent(m_window);
-
-		//作成したウィンドウに対する設定
-		glfwSwapInterval(1);
-
-		glfwSetFramebufferSizeCallback(m_window, Resize);
-
-		//このインスタンスのhisポインタを記録
-		glfwSetWindowUserPointer(m_window, this);
-
-		//ワールド座標系に対する正規化デバイス座標系の拡大率の初期値
-		//updateScale();
-		Resize(m_window, width, height);
-	}
+	Window(int width, int height, const char *title);
 
 	//デストラクタ
-	virtual ~Window(){
-		glfwDestroyWindow(m_window);
-	}
+	virtual ~Window();
 
 	//ウィンドウを閉じるべきかを判定する
 	int ShouldClose(){
@@ -94,39 +62,14 @@ public:
 
 
 	//カラーバッファを入れ替えてイベントを取りだす
-	void SwapBuffers(){
-		//カラーバッファを入れ替える
-		glfwSwapBuffers(m_window);
-
-		//イベントを取りだす
-		glfwPollEvents();
-	}
+	void SwapBuffers();
 
 	//アスペクト比を取りだす
-	GLfloat GetAspect(){
-		return m_aspect;
-	}
+	GLfloat GetAspect();
 
 	//拡大率を取りだす
-	const vector2 GetScale(){
-		return m_scale;
-	}
+	const vector2 GetScale();
 
 	//ウィンドウサイズ変更処理
-	static void Resize(GLFWwindow* const window, int width, int height){
-		glViewport(0, 0, width, height);
-
-		//thisポインタを得る
-		Window* const Instance(static_cast<Window*>(glfwGetWindowUserPointer(window)));
-
-		if (Instance != NULL){
-			//アスペクト比を更新
-			Instance->m_iw = 2.0f / static_cast<GLfloat>(width);
-			Instance->m_ih = 2.0f / static_cast<GLfloat>(height);
-
-			//拡大率を更新
-			Instance->UpdateScale();
-
-		}
-	}
+	static void Resize(GLFWwindow* const window, int width, int height);
 };
