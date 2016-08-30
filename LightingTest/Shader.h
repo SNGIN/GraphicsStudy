@@ -45,6 +45,7 @@ extern GLboolean printProgramInfoLog(GLuint program);
 extern GLuint CreateShader(const char *vsrc, const char *fsrc, const char *gsrc,
 	GLint nvarying, const char **varyings, const char *vtext, const char *ftext, const char *gtext);
 
+//シェーダークラス(メインでインスタンス化され、使用するマテリアルと紐づけられる(マテリアルクラスのメンバ変数として))
 class Shader :public BufferBase{
 
 	//シェーダープログラム名

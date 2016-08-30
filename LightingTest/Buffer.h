@@ -3,6 +3,7 @@
 #include "Commonheader.h"
 #include "BufferBase.h"
 
+//メモリに格納されるバッファオブジェクトのテンプレ
 template <typename T>
 class Buffer:public BufferBase
 {

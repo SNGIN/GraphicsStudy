@@ -1,6 +1,7 @@
 #pragma once
 #include "ShapeTriangle.h"
 
+//三角形ポリゴンの集合情報を持つクラス
 class ShapeMesh:ShapeTriangle
 {
 	Buffer<GLuint[3]> index;
@@ -24,11 +25,6 @@ public:
 			index = o.index;
 		}
 		return *this;
-	}
-
-	//メンバー変数のゲッター
-	GLuint Pos(){
-
 	}
 
 	//バッファオブジェクトに頂点のインデックスデータを転送

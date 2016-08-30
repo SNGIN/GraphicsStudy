@@ -2,6 +2,7 @@
 #include "Commonheader.h" 
 #include "ShapePoints.h"
 
+//頂点クラスを継承して面情報を管理するクラス
 class ShapeTriangle:public ShapePoints
 {
 	//頂点配列オブジェクト

@@ -2,6 +2,7 @@
 #include "Commonheader.h"
 #include "Buffer.h"
 
+//頂点情報を持つクラス
 class ShapePoints
 {
 	//頂点配列オブジェクト
