@@ -1,5 +1,6 @@
 #include "Window.h"
-#include "Shader.h";
+#include "Shader.h"
+#include "Model.h"
 
 // 形状データ
 struct Object
@@ -128,7 +129,7 @@ void Draw(){
 
 	InitConfig();
 
-	const Object object(createRectangle());
+	//Model m_Bunny("bunny.obj", true);
 
 	//描画処理
 	while (window1.ShouldClose() == GL_FALSE){
@@ -136,9 +137,6 @@ void Draw(){
 		glClear(GL_COLOR_BUFFER_BIT);
 		//シェーダプログラムの適用
 		glUseProgram(program);
-
-		glBindVertexArray(object.vao);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, object.count);
 
 		//バッファを入れ替える
 		window1.SwapBuffers();

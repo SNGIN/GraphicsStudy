@@ -65,7 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Commonheader.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
