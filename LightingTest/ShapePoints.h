@@ -85,5 +85,13 @@ public:
 		glBindVertexArray(0);
 		glDeleteVertexArrays(1, &vao);
 	}
+	//! \brief ポイントの描画.
+	virtual void draw(GLint first = 0, GLsizei count = 0) const{
+		// 頂点配列オブジェクトを指定する
+		Use();
+
+		// 図形を描画する
+		glDrawArrays(this->mode, first, count > 0 ? count : pnum() - first);
+	}
 };
 

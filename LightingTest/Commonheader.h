@@ -6,6 +6,7 @@
 
 #include "glew.h"
 #include "glfw3.h"
+#include "Matrix.h"
 #include <cmath>
 #include <cfloat>
 #include <vector>
@@ -110,6 +111,8 @@ struct faceData      // 面データ
 	GLuint t[3];  // テクスチャ座標番号
 	bool smooth;  // スムーズシェーディングの有無
 };
+
+
 
 #endif
 

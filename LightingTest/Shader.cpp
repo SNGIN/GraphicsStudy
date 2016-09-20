@@ -130,6 +130,12 @@ GLuint LoadShader(const char *vert, const char *frag, const char *geom,
 	return program;
 }
 
+void Shader::loadMatrix(const Matrix &mp, const Matrix &mw){
+	// •ÏŠ·
+	glUniformMatrix4fv(loc_matrix.mc, 1, GL_FALSE, (mp * mw).get());
+	glUniformMatrix4fv(loc_matrix.mw, 1, GL_FALSE, mw.get());
+}
+
 static GLboolean printShaderInfoLog(GLuint shader, const char *str)
 {
 	// ƒRƒ“ƒpƒCƒ‹Œ‹‰Ê‚ðŽæ“¾‚·‚é

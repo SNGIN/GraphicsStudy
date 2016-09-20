@@ -53,7 +53,7 @@ public:
 	void Draw(GLint first = 0, GLsizei count = 0) const{
 		//頂点配列オブジェクトの指定
 		Use();
-
+		std::cout << "Get " << (count > 0 ? count : GetNum() - first) * 3 << std::endl;
 		//描画
 		glDrawElements(GL_TRIANGLES, (count > 0 ? count : GetNum() - first) * 3, GL_UNSIGNED_INT,
 			static_cast<GLuint(*)[3]>(0) + first);

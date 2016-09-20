@@ -18,4 +18,8 @@ public:
 
 	void Draw();
 	void MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi,Shader &shader);
+
+	Material* GetMaterial(){
+		return m_Material;
+	}
 };

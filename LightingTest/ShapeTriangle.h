@@ -5,8 +5,6 @@
 //頂点クラスを継承して面情報を管理するクラス
 class ShapeTriangle:public ShapePoints
 {
-	//頂点配列オブジェクト
-	GLuint vao;
 	//頂点の法線ベクトル
 	Buffer<GLfloat[3]> normal;
 

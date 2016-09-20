@@ -12,6 +12,9 @@ class Window{
 	//ウインドウの高さと幅の1/2の逆数
 	GLfloat m_iw, m_ih;
 
+	//透視投影変換行列
+	Matrix mp;
+
 	//ワールド座標に対するデバイス座標系の拡大率
 	GLfloat m_s;
 
@@ -46,4 +49,7 @@ public:
 
 	int Get_w();
 	int Get_h();
+	const Matrix &getMp()const{
+		return mp;
+	}
 };

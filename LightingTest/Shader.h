@@ -27,6 +27,12 @@ struct MaterialLoc
 	GLint mg;         // モデルビュー変換の法線変換行列の uniform 変数の場所
 };
 
+//変換行列のシェーダーソースでの場所
+struct MatrixLoc
+{
+	GLint mc;
+	GLint mw;
+};
 
 static GLchar *ReadShaderSource(const char *name);
 
@@ -55,7 +61,8 @@ class Shader :public BufferBase{
 
 public:
 
-	MaterialLoc loc;
+	MaterialLoc loc_material;
+	MatrixLoc loc_matrix;
 
 	//デストラクタ
 	~Shader(){
@@ -90,6 +97,10 @@ public:
 			glDeleteProgram(program);
 		}
 		program = newProgram;
+
+		// 変換行列の uniform 変数の場所
+		loc_matrix.mc = glGetUniformLocation(program, "mc");
+		loc_matrix.mw = glGetUniformLocation(program, "mw");
 	}
 
 	//シェーダのソースを読んでプログラムオブジェクトと紐づけ
@@ -110,4 +121,7 @@ public:
 	GLuint GetProgramName()const{
 		return program;
 	}
+
+	//変換行列,mp=投影変換行列 mw モデルビュー変換行列
+	virtual void loadMatrix(const Matrix &mp, const Matrix &mw);
 };

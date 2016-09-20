@@ -71,6 +71,7 @@ void Window::Resize(GLFWwindow* const window, int width, int height){
 	Instance->m_h = height;
 
 	if (Instance != NULL){
+		Instance->mp.loadPerspective(0.5f, (float)width / (float)height, 5.0f, 25.0f);
 		//アスペクト比を更新
 		Instance->m_iw = 2.0f / static_cast<GLfloat>(width);
 		Instance->m_ih = 2.0f / static_cast<GLfloat>(height);

@@ -18,6 +18,9 @@ static GLfloat diffColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f };
 static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 GLfloat shiness = 30.0f;
 
+const Matrix mv(Lookat(0.0f, 8.0f, 16.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+
+
 static void Cleanup(void){
 	//GLFWの終了処理
 	glfwTerminate();
@@ -104,6 +107,9 @@ void Draw(){
 	while (window1.ShouldClose() == GL_FALSE){
 		// ウィンドウを消去する
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		//配置
+		m_bunny.GetMaterial()->m_shader->loadMatrix(window1.getMp(),mv*Translate(0.0f,0.0f,0.0f));
 
 		//描画
 		m_bunny.Draw();

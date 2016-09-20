@@ -14,8 +14,8 @@ Material::Material(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi,S
 }
 
 void Material::SetMaterial(){
-	glUniform4fv(m_shader->loc.kamb, 1, m_amb);
-	glUniform4fv(m_shader->loc.kdiff, 1, m_diff);
-	glUniform4fv(m_shader->loc.kspec, 1, m_spec);
-	glUniform1f(m_shader->loc.kshi, *m_shi);
+	glUniform4fv(m_shader->loc_material.kamb, 1, m_amb);
+	glUniform4fv(m_shader->loc_material.kdiff, 1, m_diff);
+	glUniform4fv(m_shader->loc_material.kspec, 1, m_spec);
+	glUniform1f(m_shader->loc_material.kshi, *m_shi);
 }

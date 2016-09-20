@@ -77,6 +77,7 @@
     <ClInclude Include="BufferBase.h" />
     <ClInclude Include="Commonheader.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="RefCounter.h" />
     <ClInclude Include="Shader.h" />
