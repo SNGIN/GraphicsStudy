@@ -5,22 +5,25 @@
 class Material
 {
 	//環境光の反射係数
-	GLfloat(*amb)[4];
+	GLfloat(*m_amb);
 	//拡散反射係数
-	GLfloat(*diff)[4];
+	GLfloat(*m_diff);
 	//鏡面反射係数
-	GLfloat(*spec)[4];
+	GLfloat(*m_spec);
 	//輝き係数
-	GLfloat*shi;
-	//使用するシェーダ
-	Shader *m_shader;
+	GLfloat*m_shi;
+
 
 public:
 	Material(){};
 	~Material(){};
 
+	//使用するシェーダ
+	Shader *m_shader;
+
 	//引数ありのコンストラクタで材質の設定とシェーダーの選択をさせたい
 	//(ついでにメンバのシェーダクラスに情報を渡す)
+	Material(GLfloat *amb, GLfloat*diff, GLfloat *spec, GLfloat *shi,Shader &shader);
 
 	void attachShader(Shader &shader){
 		this->m_shader = &shader;
@@ -29,6 +32,8 @@ public:
 	void attachShader(Shader *shader){
 		this->m_shader = shader;
 	}
+
+	void SetMaterial();
 
 };
 

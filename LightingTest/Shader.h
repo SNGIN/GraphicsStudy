@@ -53,9 +53,9 @@ class Shader :public BufferBase{
 
 	//光源情報(複数あるかも)
 
-	//材質情報(一つでいい)
-
 public:
+
+	MaterialLoc loc;
 
 	//デストラクタ
 	~Shader(){

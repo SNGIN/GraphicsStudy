@@ -13,6 +13,11 @@ struct Object
 	GLsizei count;
 };
 
+static GLfloat ambColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f }; 
+static GLfloat diffColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f };
+static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+GLfloat shiness = 30.0f;
+
 static void Cleanup(void){
 	//GLFWの終了処理
 	glfwTerminate();
@@ -83,10 +88,11 @@ void Draw(){
 	InitConfig();
 
 	//使用するシェーダーの用意
-	const Shader simple("lambert.vert", "lambert.frag");
+	Shader simple("lambert.vert", "lambert.frag");
 	//モデル読み込み
 	Model m_bunny("bunny.obj",true);
 	//モデルに対するマテリアルの設定(材質設定+どのシェーダーを使うか)
+	m_bunny.MaterialSet(ambColor, diffColor, specColor, &shiness, simple);
 
 	// ウィンドウ全体をビューポートにする
 	glViewport(0, 0, window1.Get_w(), window1.Get_h());
@@ -100,7 +106,7 @@ void Draw(){
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//描画
-		Draw();
+		m_bunny.Draw();
 
 		//バッファを入れ替える
 		window1.SwapBuffers();

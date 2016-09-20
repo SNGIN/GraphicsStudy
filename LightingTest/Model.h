@@ -5,12 +5,8 @@
 class Model
 {
 	ShapeMesh *m_Mesh;
-	// 同じ材質を割り当てるポリゴングループ数
-	GLuint ng;
-	// 同じ材質を割り当てるポリゴングループの最初のポリゴンと数
-	GLuint(*group)[2];
 	//マテリアル
-	std::vector<Material> m_MaterialList;
+	Material *m_Material;
 
 	bool FileLoad(const char *name,GLuint &nv, GLfloat (*&pos)[3],GLfloat (*&norm)[3],
 		GLuint &nf, GLuint (*&face)[3],bool normalize);
@@ -21,5 +17,5 @@ public:
 	Model(const char *name, bool normalize);
 
 	void Draw();
-	void MaterialAdd(Material mat);
+	void MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi,Shader &shader);
 };

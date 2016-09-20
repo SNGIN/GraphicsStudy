@@ -220,14 +220,20 @@ Model::Model(const char *name, bool normalize){
 	}
 }
 
-void Model::MaterialAdd(Material mat){
-	//マテリアルリストに追加
-	m_MaterialList.push_back(mat);
-}
-
 
 Model::~Model()
 {
+}
+
+void Model::Draw(){
+	//シェーダの使用
+	m_Material->m_shader->Use();
+	//描画
+	m_Mesh->Draw();
+}
+
+void Model::MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi, Shader &shader){
+	m_Material = new Material(amb, diff, spec, shi,shader);
 }
 
 /*void Model::LoadObj(const char* filename,
