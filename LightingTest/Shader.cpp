@@ -1,28 +1,29 @@
 #include "Shader.h"
 
 static GLchar *ReadShaderSource(const char *name){
-	//ファイル名がNULLならNULLを返す
-	if (name == NULL)return NULL;
+	// ファイル名が NULL なら NULL を返す
+	if (name == NULL) return NULL;
 
 	// ソースファイルを開く
 	std::ifstream file(name, std::ios::binary);
-	if (file.fail())
+
+	// ファイルが開けなければ戻る
+	if (!file)
 	{
-		// 開けなかった
 		std::cerr << "Error: Can't open source file: " << name << std::endl;
 		return NULL;
 	}
 
-	// ファイルの末尾に移動しファイルサイズを得る
+	// ファイルの末尾に移動し現在位置（＝ファイルサイズ）を得る
 	file.seekg(0L, std::ios::end);
-	GLsizei length(static_cast<GLsizei>(file.tellg()));
+	const GLsizei length(static_cast<GLsizei>(file.tellg()));
 
-
-	// ファイルサイズのメモリを確保
+	// ファイルサイズのメモリを確保する
 	GLchar *buffer(new(std::nothrow) GLchar[length + 1]);
+
+	// メモリが確保できなければ戻る
 	if (buffer == NULL)
 	{
-		// メモリ不足
 		std::cerr << "Error: Too large file: " << name << std::endl;
 		file.close();
 		return NULL;
@@ -33,16 +34,18 @@ static GLchar *ReadShaderSource(const char *name){
 	file.read(buffer, length);
 	buffer[length] = '\0';
 
+	// ファイルがうまく読み込めなければ戻る
 	if (file.bad())
 	{
-		// うまく読み込めなかった
 		std::cerr << "Error: Could not read souce file: " << name << std::endl;
-		delete buffer;
+		delete[] buffer;
 		buffer = NULL;
 	}
+
+	// ファイルを閉じる
 	file.close();
 
-	// 読み込んだソースプログラムのメモリ
+	// ソースプログラムを読み込んだメモリを返す
 	return buffer;
 }
 
@@ -97,22 +100,25 @@ GLuint CreateShader(const char *vsrc, const char *fsrc, const char *gsrc,
 			glTransformFeedbackVaryings(program, nvarying, varyings, GL_SEPARATE_ATTRIBS);
 		}
 
+		//glBindAttribLocation(program, 0, "pv");
+		//glBindFragDataLocation(program, 0, "fc");
 		//プログラムオブジェクトのリンク
 		glLinkProgram(program);
 	}
 
-	//作成したプログラムオブジェクトを返す
-	if (printProgramInfoLog(program)){
-		return program;
-	}
-	else{
+	// プログラムオブジェクトが作成できなければ 0 を返す
+	if (printProgramInfoLog(program) == GL_FALSE)
+	{
 		glDeleteProgram(program);
 		return 0;
 	}
+	// プログラムオブジェクトを返す
+	return program;
 }
 
 GLuint LoadShader(const char *vert, const char *frag, const char *geom,
-	GLint nvarying, const char **varyings){
+	GLint nvarying, const char *varyings[])
+{
 	// シェーダのソースファイルを読み込む
 	const GLchar *const vsrc(ReadShaderSource(vert));
 	const GLchar *const fsrc(ReadShaderSource(frag));
@@ -131,9 +137,11 @@ GLuint LoadShader(const char *vert, const char *frag, const char *geom,
 }
 
 void Shader::loadMatrix(const Matrix &mp, const Matrix &mw){
+	Matrix a = (mp * mw);
 	// 変換
 	glUniformMatrix4fv(loc_matrix.mc, 1, GL_FALSE, (mp * mw).get());
 	glUniformMatrix4fv(loc_matrix.mw, 1, GL_FALSE, mw.get());
+	glUniformMatrix4fv(loc_matrix.mg, 1, GL_FALSE, Normal(mw).get());
 }
 
 static GLboolean printShaderInfoLog(GLuint shader, const char *str)

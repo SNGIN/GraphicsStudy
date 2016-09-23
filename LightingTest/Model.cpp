@@ -1,5 +1,11 @@
 #include "Model.h"
 
+// ベクトル
+struct vec
+{
+	float x, y, z;
+};
+
 bool Model::FileLoad(const char *name, GLuint &nv, GLfloat(*&pos)[3], GLfloat(*&norm)[3],
 	GLuint &nf, GLuint(*&face)[3], bool normalize){
 	//OBJファイル読み込み
@@ -20,7 +26,7 @@ bool Model::FileLoad(const char *name, GLuint &nv, GLfloat(*&pos)[3], GLfloat(*&
 	xmax = ymax = zmax = -(xmin = ymin = zmin = FLT_MAX);
 
 	// 頂点位置の一時保存
-	std::vector<vector3> _pos;
+	std::vector<vec> _pos;
 	std::vector<faceData> _face;
 
 	// データを読み込む
@@ -35,23 +41,18 @@ bool Model::FileLoad(const char *name, GLuint &nv, GLfloat(*&pos)[3], GLfloat(*&
 		if (op == "v")
 		{
 			// 頂点位置
-			vector3 v;
-
-			//float型に変換(minやmax関数を使うため)
-			float vx = (float)v.x();
-			float vy = (float)v.y();
-			float vz = (float)v.z();
+			vec v;
 
 			// 頂点位置はスペースで区切られているので
-			str >> vx >> vy >> vz;
+			str >> v.x >> v.y >> v.z;
 
 			// 位置の最大値と最小値を求める (AABB)
-			xmin = std::min(xmin, vx);
-			xmax = std::max(xmax, vx);
-			ymin = std::min(ymin, vy);
-			ymax = std::max(ymax, vy);
-			zmin = std::min(zmin, vz);
-			zmax = std::max(zmax, vz);
+			xmin = std::min(xmin, v.x);
+			xmax = std::max(xmax, v.x);
+			ymin = std::min(ymin, v.y);
+			ymax = std::max(ymax, v.y);
+			zmin = std::min(zmin, v.z);
+			zmax = std::max(zmax, v.z);
 
 			// 頂点データを保存する
 			_pos.push_back(v);
@@ -133,13 +134,13 @@ bool Model::FileLoad(const char *name, GLuint &nv, GLfloat(*&pos)[3], GLfloat(*&
 	}
 
 	// 図形の大きさと位置の正規化とデータのコピー
-	for (std::vector<vector3>::const_iterator it = _pos.begin(); it != _pos.end(); ++it)
+	for (std::vector<vec>::const_iterator it = _pos.begin(); it != _pos.end(); ++it)
 	{
 		const size_t v = it - _pos.begin();
 
-		pos[v][0] = (it->x() - cx) * scale;
-		pos[v][1] = (it->y() - cy) * scale;
-		pos[v][2] = (it->z() - cz) * scale;
+		pos[v][0] = (it->x - cx) * scale;
+		pos[v][1] = (it->y - cy) * scale;
+		pos[v][2] = (it->z - cz) * scale;
 	}
 
 	// 頂点法線の値を 0 にしておく
@@ -209,7 +210,7 @@ Model::Model(const char *name, bool normalize){
 	GLuint(*face)[3];
 
 	if (FileLoad(name, nv, pos, norm, nf, face, normalize)){
-		m_Mesh = new ShapeMesh(nv, pos, norm, nf, face, GL_TRIANGLES);
+		m_Elements = new ShapeElements(nv, pos, norm, nf, face, GL_TRIANGLES);
 		// 作業用に使ったメモリを解放する
 		delete[] pos;
 		delete[] norm;
@@ -229,66 +230,9 @@ void Model::Draw(){
 	//シェーダの使用
 	m_Material->m_shader->Use();
 	//描画
-	m_Mesh->Draw();
+	m_Elements->Draw();
 }
 
 void Model::MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi, Shader &shader){
 	m_Material = new Material(amb, diff, spec, shi,shader);
 }
-
-/*void Model::LoadObj(const char* filename,
-	std::vector<vector4> &vertices,
-	std::vector<vector3> &normals,
-	std::vector<GLushort> &elements){
-
-	std::ifstream in(filename, std::ios::in);
-	if (!in)
-	{
-		std::cerr << filename << "を開けませんでした" << std::endl;
-		std::exit(1);
-	}
-
-	std::string line;
-	while (getline(in, line))
-	{
-		//頂点情報の読み込み
-		if (line.substr(0, 2) == "v ")
-		{
-			std::istringstream s(line.substr(2));
-			vector4 v;
-			s >> v.x;
-			s >> v.y;
-			s >> v.z;
-			v.w = 1.0f;
-			vertices.push_back(v);
-		}
-		//三角情報の読み込み
-		else if (line.substr(0, 2) == "f ")
-		{
-			std::istringstream s(line.substr(2));
-			GLushort a, b, c;
-			s >> a;
-			s >> b;
-			s >> c;
-			a--;
-			b--;
-			c--;
-			elements.push_back(a);
-			elements.push_back(b);
-			elements.push_back(c);
-		}
-		
-	}
-	//法線情報コンテナの初期化
-	normals.resize(vertices.size(), vector3(0, 0, 0));
-	for (int i = 0; i < elements.size(); i += 3){
-		GLushort ia = elements[i];
-		GLushort ib = elements[i + 1];
-		GLushort ic = elements[i + 2];
-
-		//頂点ごとに法線ベクトルの計算
-		vector3 normal = 
-		normals[ia] = normals[ib] = normals[ic] = normal;
-	}
-
-}*/

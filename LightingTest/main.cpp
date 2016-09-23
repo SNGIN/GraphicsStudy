@@ -4,22 +4,27 @@
 #include "Shader.h"
 #include "Model.h"
 
-// 形状データ
-struct Object
-{
-	// 頂点配列オブジェクト名
-	GLuint vao;
-	// データの要素数
-	GLsizei count;
-};
-
 static GLfloat ambColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f }; 
 static GLfloat diffColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f };
 static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 GLfloat shiness = 30.0f;
 
-const Matrix mv(Lookat(0.0f, 8.0f, 16.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+const Matrix mv(Lookat(0.0f, 1.0f, 2.3f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
 
+//光源特性
+/*struct Light
+{
+	GLfloat ambient[4];
+	GLfloat diffuse[4];
+	GLfloat specular[4];
+	GLfloat position[4];
+
+	// シェーダーソースでの場所
+	GLint pl;         // 光源位置の uniform 変数の場所
+	GLint lamb;       // 光源強度の環境光成分の uniform 変数の場所
+	GLint ldiff;      // 光源強度の拡散反射光成分の uniform 変数の場所
+	GLint lspec;      // 光源強度の鏡面反射光成分の uniform 変数の場所
+};*/
 
 static void Cleanup(void){
 	//GLFWの終了処理
@@ -55,14 +60,21 @@ static bool Initialize_GLEW(){
 void InitConfig()
 {
 	// 背景色
-	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+	glClearColor(0.2f, 0.4f, 0.6f, 0.0f);
+
+	// 隠面消去を有効にする
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
+	// アルファブレンディングの設定
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//ビューポート設定
 	//glViewport(100, 50, 300, 300);
 
 	//version3.2 core profileを選択
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
@@ -71,29 +83,28 @@ void Draw(){
 
 }
 
-
-
- int main(){
+int main(){
 	//GLFWの初期化
 	if (!Initialize_GLFW()){
 		return 1;
 	}
 
 	//ウインドウを作成する
-	Window window1(1200, 1200, "hello!");
+	Window window1(600, 480, "hello!");
 
 	//GLEWの初期化
 	if (!Initialize_GLEW()){
 		return 1;
 	}
 
-	//光源や色などの初期設定
+	//色などの初期設定
 	InitConfig();
 
 	//使用するシェーダーの用意
-	Shader simple("lambert.vert", "lambert.frag");
+	Shader simple("point.vert", "point.frag");
+
 	//モデル読み込み
-	Model m_bunny("bunny.obj",true);
+	Model m_bunny("bunny.obj");
 	//モデルに対するマテリアルの設定(材質設定+どのシェーダーを使うか)
 	m_bunny.MaterialSet(ambColor, diffColor, specColor, &shiness, simple);
 
@@ -105,20 +116,32 @@ void Draw(){
 
 	//描画処理
 	while (window1.ShouldClose() == GL_FALSE){
-		// ウィンドウを消去する
-		glClear(GL_COLOR_BUFFER_BIT);
+		// 画面消去
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//配置
 		m_bunny.GetMaterial()->m_shader->loadMatrix(window1.getMp(),mv*Translate(0.0f,0.0f,0.0f));
 
+		// モデルビュー変換行列
+		//const Matrix mw(mv);
+
+		// 法線変換行列
+		//const Matrix mg(mw.normal());
+
+		// モデルビュー・投影変換
+		//const Matrix mc(window1.getMp() * mw);
+
 		//描画
 		m_bunny.Draw();
+
+		// シェーダプログラムの使用終了
+		glUseProgram(0);
 
 		//バッファを入れ替える
 		window1.SwapBuffers();
 	}
 
-	//ゲームが終わった時の処理
+	//終わった時の処理
 	atexit(Cleanup);
 	return 0;
 }

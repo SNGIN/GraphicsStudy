@@ -18,10 +18,10 @@ class ShapeTriangle:public ShapePoints
 	}
 
 public:
-	ShapeTriangle(){
-	}
-	ShapeTriangle(GLuint nv,const GLfloat (*pos)[3],const GLfloat (*norm)[3],GLenum usage = GL_STATIC_DRAW)
-		:ShapePoints(nv,norm,usage){
+
+	ShapeTriangle(GLenum mode = GL_TRIANGLES) :ShapePoints(mode){}
+	ShapeTriangle(GLuint nv, const GLfloat(*pos)[3], const GLfloat(*norm)[3], GLenum mode = GL_TRIANGLES, GLenum usage = GL_STATIC_DRAW)
+		:ShapePoints(nv, pos, mode, usage){
 		LoadNormal(nv, norm, usage);
 	}
 

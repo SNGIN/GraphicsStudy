@@ -576,7 +576,24 @@ Matrix &loadInvert(const Matrix &m)
 //! \brief –@ü•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param a GLfloat[16] Œ^‚Ì•ÏŠ·s—ñ.
 //!   \return İ’è‚µ‚½ m ‚Ì–@ü•ÏŠ·s—ñ.
-Matrix &loadNormal(const GLfloat *a);
+Matrix &loadNormal(const GLfloat *marray){
+	//•ÏŠ·s—ñF–@ü•ÏŠ·s—ñ‚ğİ’è‚·‚é
+
+	array[0] = marray[5] * marray[10] - marray[6] * marray[9];
+	array[1] = marray[6] * marray[8] - marray[4] * marray[10];
+	array[2] = marray[4] * marray[9] - marray[5] * marray[8];
+	array[4] = marray[9] * marray[2] - marray[10] * marray[1];
+	array[5] = marray[10] * marray[0] - marray[8] * marray[2];
+	array[6] = marray[8] * marray[1] - marray[9] * marray[0];
+	array[8] = marray[1] * marray[6] - marray[2] * marray[5];
+	array[9] = marray[2] * marray[4] - marray[0] * marray[6];
+	array[10] = marray[0] * marray[5] - marray[1] * marray[4];
+	array[3] = array[7] = array[11] = array[12] = array[13] = array[14] = 0.0f;
+	array[15] = 1.0f;
+
+	return *this;
+		
+}
 
 //! \brief –@ü•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param Matrix Œ^‚Ì•ÏŠ·s—ñ.

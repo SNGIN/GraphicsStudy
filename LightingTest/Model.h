@@ -1,10 +1,10 @@
 #pragma once
-#include "ShapeMesh.h"
+#include "ShapeElements.h"
 #include "Material.h"
 
 class Model
 {
-	ShapeMesh *m_Mesh;
+	ShapeElements *m_Elements;
 	//ƒ}ƒeƒŠƒAƒ‹
 	Material *m_Material;
 
@@ -14,7 +14,7 @@ class Model
 public:
 	Model();
 	~Model();
-	Model(const char *name, bool normalize);
+	Model(const char *name, bool normalize = false);
 
 	void Draw();
 	void MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi,Shader &shader);

@@ -2,21 +2,6 @@
 #include "Commonheader.h"
 #include "BufferBase.h"
 
-//光源特性
-struct Light
-{
-	GLfloat ambient[4];
-	GLfloat diffuse[4];
-	GLfloat specular[4];
-	GLfloat position[4];
-
-	// シェーダーソースでの場所
-	GLint pl;         // 光源位置の uniform 変数の場所
-	GLint lamb;       // 光源強度の環境光成分の uniform 変数の場所
-	GLint ldiff;      // 光源強度の拡散反射光成分の uniform 変数の場所
-	GLint lspec;      // 光源強度の鏡面反射光成分の uniform 変数の場所
-};
-
 //材質情報のシェーダーソースでの場所
 struct MaterialLoc
 {
@@ -24,7 +9,6 @@ struct MaterialLoc
 	GLint kdiff;      // 拡散反射係数の uniform 変数の場所
 	GLint kspec;      // 鏡面反射係数の uniform 変数の場所
 	GLint kshi;       // 輝き係数の uniform 変数の場所
-	GLint mg;         // モデルビュー変換の法線変換行列の uniform 変数の場所
 };
 
 //変換行列のシェーダーソースでの場所
@@ -32,12 +16,13 @@ struct MatrixLoc
 {
 	GLint mc;
 	GLint mw;
+	GLint mg;         // モデルビュー変換の法線変換行列の uniform 変数の場所
 };
 
 static GLchar *ReadShaderSource(const char *name);
 
-extern GLuint LoadShader(const char *vert, const char *frag, const char *geom,
-	GLint nvarying, const char **varyings);
+extern GLuint LoadShader(const char *vert, const char *frag = NULL, const char *geom = NULL,
+	int nvarying = 0, const char *varyings[] = NULL);
 
 #ifdef DEBUG
 // シェーダオブジェクトのコンパイル結果を表示する
@@ -57,8 +42,6 @@ class Shader :public BufferBase{
 	//シェーダープログラム名
 	GLuint program;
 
-	//光源情報(複数あるかも)
-
 public:
 
 	MaterialLoc loc_material;
@@ -76,7 +59,14 @@ public:
 
 	//引数ありのコンストラクタ
 	Shader(const char *vert, const char *frag = 0, const char *geom = 0,
-		int nvarying = 0, const char **varyings = 0) :program(LoadShader(vert, frag, geom, nvarying, varyings)){}
+		int nvarying = 0, const char **varyings = 0) :program(LoadShader(vert, frag, geom, nvarying, varyings)){
+		
+		// 変換行列の uniform 変数の場所
+		loc_matrix.mc = glGetUniformLocation(program, "mc");
+		loc_matrix.mw = glGetUniformLocation(program, "mw");
+		// 変換行列の uniform 変数の場所
+		loc_matrix.mg = glGetUniformLocation(program, "mg");
+	}
 
 	//コピーコンストラクタ
 	Shader(const Shader &o) :BufferBase(o), program(o.program){}
@@ -90,17 +80,13 @@ public:
 		return *this;
 	}
 
-	//別のシェーダプログラムを登録
+	//シェーダプログラムを登録
 	void SetProgram(GLuint newProgram){
 		if (program != 0 && newCounter()){
 			glUseProgram(0);
 			glDeleteProgram(program);
 		}
 		program = newProgram;
-
-		// 変換行列の uniform 変数の場所
-		loc_matrix.mc = glGetUniformLocation(program, "mc");
-		loc_matrix.mw = glGetUniformLocation(program, "mw");
 	}
 
 	//シェーダのソースを読んでプログラムオブジェクトと紐づけ
