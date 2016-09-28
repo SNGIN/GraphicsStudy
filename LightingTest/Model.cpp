@@ -227,8 +227,6 @@ Model::~Model()
 }
 
 void Model::Draw(){
-	//シェーダの使用
-	m_Material->m_shader->Use();
 	//描画
 	m_Elements->Draw();
 }

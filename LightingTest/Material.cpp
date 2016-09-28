@@ -11,6 +11,15 @@ Material::Material(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi,S
 
 	//シェーダーの選択
 	attachShader(shader);
+	shader.Use();
+
+	// 材質のパラメータの uniform 変数の場所をセットする
+	shader.loc_material.kamb = glGetUniformLocation(shader.GetProgramName(), "kamb");
+	shader.loc_material.kdiff = glGetUniformLocation(shader.GetProgramName(), "kdiff");
+	shader.loc_material.kspec = glGetUniformLocation(shader.GetProgramName(), "kspec");
+	shader.loc_material.kshi = glGetUniformLocation(shader.GetProgramName(), "kshi");
+
+	SetMaterial();
 }
 
 void Material::SetMaterial(){

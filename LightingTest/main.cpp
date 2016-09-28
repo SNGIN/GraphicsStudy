@@ -4,11 +4,14 @@
 #include "Shader.h"
 #include "Model.h"
 
-static GLfloat ambColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f }; 
-static GLfloat diffColor[4] = { 0.2f, 0.2f, 0.8f, 1.0f };
-static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-GLfloat shiness = 30.0f;
 
+//材質の色
+static GLfloat ambColor[4] = { 0.6f, 0.6f, 0.6f, 1.0f }; 
+static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+static GLfloat shiness = 30.0f;
+
+//ビューの変換行列(注視点の設定)
 const Matrix mv(Lookat(0.0f, 1.0f, 2.3f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
 
 //光源特性
@@ -90,18 +93,18 @@ int main(){
 	}
 
 	//ウインドウを作成する
-	Window window1(600, 480, "hello!");
+	Window window1(1024, 768, "Test!");
 
 	//GLEWの初期化
 	if (!Initialize_GLEW()){
 		return 1;
 	}
 
-	//色などの初期設定
+	//初期設定
 	InitConfig();
 
 	//使用するシェーダーの用意
-	Shader simple("point.vert", "point.frag");
+	Shader simple("lambert.vert", "lambert.frag");
 
 	//モデル読み込み
 	Model m_bunny("bunny.obj");
@@ -118,25 +121,14 @@ int main(){
 	while (window1.ShouldClose() == GL_FALSE){
 		// 画面消去
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		//シェーダの使用
+		m_bunny.GetMaterial()->m_shader->Use();
 		//配置
-		m_bunny.GetMaterial()->m_shader->loadMatrix(window1.getMp(),mv*Translate(0.0f,0.0f,0.0f));
-
-		// モデルビュー変換行列
-		//const Matrix mw(mv);
-
-		// 法線変換行列
-		//const Matrix mg(mw.normal());
-
-		// モデルビュー・投影変換
-		//const Matrix mc(window1.getMp() * mw);
-
+		m_bunny.GetMaterial()->m_shader->loadMatrix(window1.getMp(), mv*Translate(0.0f, 0.0f, 0.0f));
 		//描画
 		m_bunny.Draw();
-
 		// シェーダプログラムの使用終了
 		glUseProgram(0);
-
 		//バッファを入れ替える
 		window1.SwapBuffers();
 	}

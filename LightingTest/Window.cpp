@@ -31,10 +31,11 @@ m_window(glfwCreateWindow(width, height, title, NULL, NULL))
 
 	//ワールド座標系に対する正規化デバイス座標系の拡大率の初期値
 	//updateScale();
-	Resize(m_window, width, height);
 
 	m_w = width;
 	m_h = height;
+
+	Resize(m_window, width, height);
 }
 
 //デストラクタ

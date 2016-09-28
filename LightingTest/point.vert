@@ -11,5 +11,5 @@ layout (location = 0) in vec4 pv;                   // ローカル座標系の頂点位置
 layout (location = 1) in vec4 nv;                   // 頂点の法線ベクトル
 
 void main(){
-	gl_Position =  pv;
+	gl_Position = pv * mc;
 }
