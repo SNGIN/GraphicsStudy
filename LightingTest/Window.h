@@ -52,4 +52,7 @@ public:
 	const Matrix &getMp()const{
 		return mp;
 	}
+	GLFWwindow* GetWindow(){
+		return m_window;
+	}
 };

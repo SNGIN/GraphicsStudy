@@ -3,6 +3,8 @@
 #include "Window.h"
 #include "Shader.h"
 #include "Model.h"
+#include "SeaquenceController.h"
+#include "InputManager.h"
 
 
 //材質の色
@@ -103,6 +105,12 @@ int main(){
 	//初期設定
 	InitConfig();
 
+	InputManager::SetMyWindow(window1.GetWindow());
+
+	if (!SeaquenceController::instance()){
+		SeaquenceController::Create();
+	}
+
 	//使用するシェーダーの用意
 	Shader simple("lambert.vert", "lambert.frag");
 
@@ -131,6 +139,8 @@ int main(){
 		glUseProgram(0);
 		//バッファを入れ替える
 		window1.SwapBuffers();
+
+		SeaquenceController::instance()->Update();
 	}
 
 	//終わった時の処理

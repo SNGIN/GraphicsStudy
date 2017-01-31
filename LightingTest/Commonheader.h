@@ -20,6 +20,14 @@
 #if !defined(MATH)
 #define MATH
 
+static class Common{
+public:
+	static void Delete(void* pointer){
+		delete pointer;
+		pointer = 0;
+	}
+};
+
 class vector2{
 	GLfloat m_x, m_y;
 public:
@@ -104,6 +112,33 @@ public:
 
 };
 
+template<class T>class Array2D{
+public:
+	Array2D() :mArray(0){}
+	~Array2D(){
+		Common::Delete(mArray);
+	}
+	void setSize(int size0, int size1){
+		Common::Delete(mArray);
+		mSize0 = size0;
+		mSize1 = size1;
+		mArray = new T[size0 * size1];
+	}
+
+	T& operator()(int index0, int index1){
+		return mArray[index1 * mSize0 + index0];
+	}
+
+	const T& operator()(int index0, int index1)const{
+		return mArray[index1 * mSize0 + index0];
+	}
+
+private:
+	T* mArray;
+	int mSize0;
+	int mSize1;
+};
+
 struct faceData      // 面データ
 {
 	GLuint p[3];  // 頂点座標番号
@@ -111,8 +146,6 @@ struct faceData      // 面データ
 	GLuint t[3];  // テクスチャ座標番号
 	bool smooth;  // スムーズシェーディングの有無
 };
-
-
 
 #endif
 

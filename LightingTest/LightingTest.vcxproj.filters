@@ -16,21 +16,102 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{87550c01-a59e-4e3b-a10e-a0228d65925b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic">
+      <UniqueIdentifier>{26d9b41b-81b4-46ae-9036-a3b7836eefde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Graphic">
+      <UniqueIdentifier>{36f53525-02ab-431c-b4ea-e83eef42ae40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game">
+      <UniqueIdentifier>{fec6e644-2f2a-44ab-a219-96ef08c967d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game">
+      <UniqueIdentifier>{46bb50f9-4c7b-4c0d-a147-5ddeb27ba4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Seaquence">
+      <UniqueIdentifier>{135747b6-53bb-4d35-9440-8b6747dab2a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\GameSeaquence">
+      <UniqueIdentifier>{713724a8-e3fc-4102-a6d5-81f2beadfccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Seaquence">
+      <UniqueIdentifier>{95831ee3-f64c-41ae-84d1-6928619fa13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\GameSeaquence">
+      <UniqueIdentifier>{a25fdfa3-34e6-4b85-98e2-1d108d58c9a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Object">
+      <UniqueIdentifier>{e214cf75-1c76-4c3c-b208-2bbe78601878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Obj">
+      <UniqueIdentifier>{cbecb164-b14a-42c5-bbb1-327c4403aebc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
+      <Filter>ソース ファイル\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>ソース ファイル\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Seaquence.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSeaquence.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Clear.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="SeaquenceController.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicObj.cpp">
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObj.cpp">
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalObj.cpp">
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Play.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Ready.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSeaquenceController.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Failure.cpp">
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,37 +119,91 @@
     <ClInclude Include="Commonheader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="RefCounter.h">
+    <ClInclude Include="InputManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Buffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapePoints.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeTriangle.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="BufferBase.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="RefCounter.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="ShapeElements.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePoints.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeTriangle.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Boot.h">
+      <Filter>ヘッダー ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Seaquence.h">
+      <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSeaquence.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObj.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObj.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalObj.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>ヘッダー ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SeaquenceController.h">
+      <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Play.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSeaquenceController.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Ready.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Clear.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Failure.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

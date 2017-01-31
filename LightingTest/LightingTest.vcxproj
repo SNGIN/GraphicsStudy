@@ -66,24 +66,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Clear.cpp" />
+    <ClCompile Include="DynamicObj.cpp" />
+    <ClCompile Include="Ending.cpp" />
+    <ClCompile Include="Failure.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameSeaquence.cpp" />
+    <ClCompile Include="GameSeaquenceController.cpp" />
+    <ClCompile Include="GoalObj.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="Play.cpp" />
+    <ClCompile Include="Ready.cpp" />
+    <ClCompile Include="Seaquence.cpp" />
+    <ClCompile Include="SeaquenceController.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StaticObj.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boot.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferBase.h" />
+    <ClInclude Include="Clear.h" />
     <ClInclude Include="Commonheader.h" />
+    <ClInclude Include="DynamicObj.h" />
+    <ClInclude Include="Ending.h" />
+    <ClInclude Include="Failure.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameSeaquence.h" />
+    <ClInclude Include="GameSeaquenceController.h" />
+    <ClInclude Include="GoalObj.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Pause.h" />
+    <ClInclude Include="Play.h" />
+    <ClInclude Include="Ready.h" />
     <ClInclude Include="RefCounter.h" />
+    <ClInclude Include="Seaquence.h" />
+    <ClInclude Include="SeaquenceController.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShapeElements.h" />
     <ClInclude Include="ShapePoints.h" />
     <ClInclude Include="ShapeTriangle.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StaticObj.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
