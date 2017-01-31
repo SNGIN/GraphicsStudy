@@ -12,6 +12,7 @@ Failure::~Failure()
 {
 }
 
+//É~ÉXï\é¶
 Boot* Failure::Update(GameSeaquenceController* controller){
 	Boot* next = this;
 	if (mCount == 60){

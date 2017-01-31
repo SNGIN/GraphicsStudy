@@ -46,14 +46,14 @@
     <Filter Include="ソース ファイル\Game\Obj">
       <UniqueIdentifier>{cbecb164-b14a-42c5-bbb1-327c4403aebc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Common">
+      <UniqueIdentifier>{ec2ee91a-8420-4acc-832f-a3fd80578d84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Common">
+      <UniqueIdentifier>{82a56175-e640-4cec-8ba1-00de53da8441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>ソース ファイル\Graphic</Filter>
     </ClCompile>
@@ -112,19 +112,16 @@
       <Filter>ソース ファイル\Game\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Pause.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Commonheader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Buffer.h">
       <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
@@ -204,7 +201,16 @@
       <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
     </ClInclude>
     <ClInclude Include="Pause.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Commonheader.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

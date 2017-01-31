@@ -60,3 +60,9 @@ void State::Update(){
 bool State::hasCleared()const{
 	return mGoalObj->CheckGoal();
 }
+
+//ミスしたかどうか
+bool State::hasMissed()const{
+	//落ちたらミスの判定を入れる
+	return false;
+}

@@ -16,6 +16,7 @@ public:
 	void Draw()const;
 	//ŠO‚©‚ç“n‚³‚ê‚éî•ñ
 	bool hasCleared()const;
+	bool hasMissed()const;
 private:
 	StaticObj* mStaticObjects;
 	DynamicObj* mDynamicObjects;

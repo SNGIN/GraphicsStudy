@@ -27,10 +27,11 @@ public:
 	void StartLoading();
 	void GotoNextStage();
 	int LifeNumber();
+	void ReduceLife();
 private:
 	State* mState;
 	int mStageID;
-	int mLifeNumber;
+	int mLife;
 	//最終ステージ面定義
 	static const int FINALSTAGE = 2;
 

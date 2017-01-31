@@ -47,6 +47,10 @@ bool GameSeaquenceController::HasFinalStageCleard()const{
 	return(mStageID > FINALSTAGE);
 }
 
+State* GameSeaquenceController::GetState(){
+	return mState;
+}
+
 void GameSeaquenceController::DrawState()const{
 	mState->Draw();
 }
@@ -61,5 +65,9 @@ void GameSeaquenceController::GotoNextStage(){
 }
 
 int GameSeaquenceController::LifeNumber(){
-	return mLifeNumber;
+	return mLife;
+}
+
+void GameSeaquenceController::ReduceLife(){
+	--mLife;
 }

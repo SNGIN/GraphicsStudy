@@ -1,5 +1,6 @@
 #pragma once
 #include "Commonheader.h"
+#include "InputManager.h"
 
 //シーケンスの元クラス(派生クラスのUpdateを更新していく)
 class Boot

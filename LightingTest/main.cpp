@@ -104,13 +104,12 @@ int main(){
 
 	//初期設定
 	InitConfig();
-
 	InputManager::SetMyWindow(window1.GetWindow());
-
 	if (!SeaquenceController::instance()){
 		SeaquenceController::Create();
 	}
 
+	//TODO:グラフィック系にうつす
 	//使用するシェーダーの用意
 	Shader simple("lambert.vert", "lambert.frag");
 
@@ -140,7 +139,9 @@ int main(){
 		//バッファを入れ替える
 		window1.SwapBuffers();
 
+		//シーケンス処理のチェック
 		SeaquenceController::instance()->Update();
+
 	}
 
 	//終わった時の処理
