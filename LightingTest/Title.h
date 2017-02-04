@@ -1,6 +1,7 @@
 #pragma once
 #include "Seaquence.h"
 #include "Commonheader.h"
+#include "Rect.h"
 
 class SeaquenceController;
 
@@ -13,5 +14,5 @@ public:
 
 	Boot* Update(SeaquenceController*);
 private:
-	//タイトル画面のイメージ保持
+	Rect* mrect;//タイトル表示に使うRectオブジェト
 };

@@ -52,11 +52,14 @@
     <Filter Include="ソース ファイル\Common">
       <UniqueIdentifier>{82a56175-e640-4cec-8ba1-00de53da8441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphic\Material">
+      <UniqueIdentifier>{7d13919f-cd73-4d20-a1dd-be7e87e7edb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Material">
+      <UniqueIdentifier>{4e8644ae-1f24-4bcd-87ee-d35ff1f86f1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Material.cpp">
-      <Filter>ソース ファイル\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>ソース ファイル\Graphic</Filter>
     </ClCompile>
@@ -120,15 +123,27 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>ソース ファイル\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>ソース ファイル\Graphic\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleImageMaterial.cpp">
+      <Filter>ソース ファイル\Graphic\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>ソース ファイル\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h">
       <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="BufferBase.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
       <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -203,14 +218,29 @@
     <ClInclude Include="Pause.h">
       <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>ヘッダー ファイル\Common</Filter>
     </ClInclude>
     <ClInclude Include="Commonheader.h">
       <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>ヘッダー ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleImageMaterial.h">
+      <Filter>ヘッダー ファイル\Graphic\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>ヘッダー ファイル\Graphic\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,10 +251,10 @@
     <None Include="lambert.frag">
       <Filter>Shader</Filter>
     </None>
-    <None Include="point.frag">
+    <None Include="simpleTex.vert">
       <Filter>Shader</Filter>
     </None>
-    <None Include="point.vert">
+    <None Include="simpleTex.frag">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

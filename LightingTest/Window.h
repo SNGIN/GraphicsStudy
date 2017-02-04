@@ -1,42 +1,47 @@
 #pragma once
 #include "Commonheader.h"
 
-class Window{
+//どのクラスからも参照される一つのオブジェクトなのでstatic
+static class Window{
 	//ウィンドウのハンドル
-	GLFWwindow* const m_window;
+	static GLFWwindow* m_window;
 	//アスペクト比
 	GLfloat m_aspect;
 	//横幅
-	int m_w;
-	int m_h;
+	static int m_w;
+	static int m_h;
 	//ウインドウの高さと幅の1/2の逆数
-	GLfloat m_iw, m_ih;
+	static GLfloat m_iw, m_ih;
 
 	//透視投影変換行列
-	Matrix mp;
+	static Matrix mp;
 
 	//ワールド座標に対するデバイス座標系の拡大率
-	GLfloat m_s;
+	static GLfloat m_s;
 
 	//ワールド座標系に対する正規化デバイス座標系の拡大率
-	vector2 m_scale;
+	static vector2 m_scale;
 
 	//拡大率の算出
 	void UpdateScale();
+
 public:
-	Window(int width, int height, const char *title);
+	Window();
 
 	//デストラクタ
 	virtual ~Window();
 
+	static void CreateWindow(int width, int height, const char *title);
+
 	//ウィンドウを閉じるべきかを判定する
-	int ShouldClose(){
+	static int ShouldClose(){
 		return (glfwWindowShouldClose(m_window));
 	}
 
+	static Matrix ReturnMV();
 
 	//カラーバッファを入れ替えてイベントを取りだす
-	void SwapBuffers();
+	static void SwapBuffers();
 
 	//アスペクト比を取りだす
 	GLfloat GetAspect();
@@ -47,12 +52,12 @@ public:
 	//ウィンドウサイズ変更処理
 	static void Resize(GLFWwindow* const window, int width, int height);
 
-	int Get_w();
-	int Get_h();
-	const Matrix &getMp()const{
+	static int Get_w();
+	static int Get_h();
+	static Matrix &getMp(){
 		return mp;
 	}
-	GLFWwindow* GetWindow(){
+	static GLFWwindow* GetWindow(){
 		return m_window;
 	}
 };

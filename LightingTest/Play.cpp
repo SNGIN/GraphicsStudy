@@ -27,12 +27,12 @@ Boot* Play::Update(GameSeaquenceController* controller){
 	bool missed = state->hasMissed();
 	
 	//-------------確認用
-	if (InputManager::CheckInputMoveUp()){
+	/*if (InputManager::CheckInputMoveUp()){
 		cleared = true;
 	}
 	if (InputManager::CheckInputB()){
 		missed = true;
-	}
+	}*/
 	//-------------確認用
 
 	if (cleared){

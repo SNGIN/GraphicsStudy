@@ -13,13 +13,13 @@ public:
 	~State();
 
 	void Update();
-	void Draw()const;
+	void Draw();
 	//ŠO‚©‚ç“n‚³‚ê‚éî•ñ
 	bool hasCleared()const;
 	bool hasMissed()const;
 private:
 	StaticObj* mStaticObjects;
-	DynamicObj* mDynamicObjects;
+	DynamicObj** mDynamicObjects;
 	int mStaticObjectNumber;
 	int mDynamicObjectNumber;
 	int mstageID;

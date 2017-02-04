@@ -1,41 +1,64 @@
 #include "Window.h"
 
+//static変数群
+GLFWwindow* Window::m_window = 0;
+//横幅
+int Window::m_w = 0;
+int Window::m_h = 0;
+//ウインドウの高さと幅の1/2の逆数
+GLfloat Window::m_iw = 0;
+GLfloat Window::m_ih = 0;
+
+//透視投影変換行列
+Matrix Window::mp=Matrix();
+
+//ワールド座標に対するデバイス座標系の拡大率
+GLfloat Window::m_s = 0;
+
+//ワールド座標系に対する正規化デバイス座標系の拡大率
+vector2 Window::m_scale = vector2(0,0);
+
 //拡大率の算出
 void Window::UpdateScale(){
 	m_scale.set(m_s*m_iw, m_s*m_ih);
 }
 
 //コンストラクタ
-Window::Window(int width, int height, const char *title) :
-m_window(glfwCreateWindow(width, height, title, NULL, NULL))
-, m_iw(2.0f / static_cast<GLfloat>(width))
-, m_ih(2.0f / static_cast<GLfloat>(height))
-, m_s(100.0f)
-{
-	if (m_window == NULL){
-		//ウィンドウが作成できなかった
-		std::cerr << "Can't" << std::endl;
-		exit(1);
-	}
+Window::Window(){
+}
 
-	//現在のウィンドウを処理対象に
-	glfwMakeContextCurrent(m_window);
+void Window::CreateWindow(int width, int height, const char *title){
 
-	//作成したウィンドウに対する設定
-	glfwSwapInterval(1);
+	m_window = glfwCreateWindow(width, height, title, NULL, NULL);
+	m_iw = (2.0f / static_cast<GLfloat>(width));
+	m_ih = (2.0f / static_cast<GLfloat>(height));
+	m_s = (100.0f);
 
-	glfwSetFramebufferSizeCallback(m_window, Resize);
+		if (m_window == NULL){
+			//ウィンドウが作成できなかった
+			std::cerr << "Can't" << std::endl;
+			exit(1);
+		}
 
-	//このインスタンスのhisポインタを記録
-	glfwSetWindowUserPointer(m_window, this);
+		//現在のウィンドウを処理対象に
+		glfwMakeContextCurrent(m_window);
 
-	//ワールド座標系に対する正規化デバイス座標系の拡大率の初期値
-	//updateScale();
+		//作成したウィンドウに対する設定
+		glfwSwapInterval(1);
 
-	m_w = width;
-	m_h = height;
+		glfwSetFramebufferSizeCallback(m_window, Resize);
 
-	Resize(m_window, width, height);
+		//このインスタンスのthisポインタを記録
+		glfwSetWindowUserPointer(m_window,m_window);
+
+		//ワールド座標系に対する正規化デバイス座標系の拡大率の初期値
+		//updateScale();
+
+		m_w = width;
+		m_h = height;
+
+		Resize(m_window, width, height);
+
 }
 
 //デストラクタ
@@ -89,4 +112,9 @@ int Window::Get_w(){
 
 int Window::Get_h(){
 	return m_h;
+}
+
+Matrix Window::ReturnMV(){
+	//ビューの変換行列(注視点の設定)
+	return Matrix(Lookat(0.0f, 8.0f, 6.3f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
 }

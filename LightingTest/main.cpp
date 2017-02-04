@@ -13,9 +13,6 @@ static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 static GLfloat shiness = 30.0f;
 
-//ビューの変換行列(注視点の設定)
-const Matrix mv(Lookat(0.0f, 1.0f, 2.3f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
-
 //光源特性
 /*struct Light
 {
@@ -95,7 +92,7 @@ int main(){
 	}
 
 	//ウインドウを作成する
-	Window window1(1024, 768, "Test!");
+	Window::CreateWindow(1024, 768, "Test!");
 
 	//GLEWの初期化
 	if (!Initialize_GLEW()){
@@ -104,7 +101,7 @@ int main(){
 
 	//初期設定
 	InitConfig();
-	InputManager::SetMyWindow(window1.GetWindow());
+	InputManager::SetMyWindow(Window::GetWindow());
 	if (!SeaquenceController::instance()){
 		SeaquenceController::Create();
 	}
@@ -114,33 +111,34 @@ int main(){
 	Shader simple("lambert.vert", "lambert.frag");
 
 	//モデル読み込み
-	Model m_bunny("bunny.obj");
+	//Model* m_bunny = new Model("bunny.obj");
 	//モデルに対するマテリアルの設定(材質設定+どのシェーダーを使うか)
-	m_bunny.MaterialSet(ambColor, diffColor, specColor, &shiness, simple);
+	//m_bunny->MaterialSet(simple);
 
 	// ウィンドウ全体をビューポートにする
-	glViewport(0, 0, window1.Get_w(), window1.Get_h());
+	glViewport(0, 0, Window::Get_w(), Window::Get_h());
 
 	//カラーマスクの設定
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
 	//描画処理
-	while (window1.ShouldClose() == GL_FALSE){
+	while (Window::ShouldClose() == GL_FALSE){
 		// 画面消去
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//シェーダの使用
-		m_bunny.GetMaterial()->m_shader->Use();
-		//配置
-		m_bunny.GetMaterial()->m_shader->loadMatrix(window1.getMp(), mv*Translate(0.0f, 0.0f, 0.0f));
-		//描画
-		m_bunny.Draw();
-		// シェーダプログラムの使用終了
-		glUseProgram(0);
-		//バッファを入れ替える
-		window1.SwapBuffers();
 
 		//シーケンス処理のチェック
 		SeaquenceController::instance()->Update();
+
+		//シェーダの使用
+		//m_bunny->GetMaterial()->m_shader->Use();
+		//m_bunny->GetMaterial()->m_shader->loadMatrix(Window::getMp(), Window::ReturnMV()*Translate(0.0f, 0.0f, -2.0f));
+
+		//描画
+		//m_bunny->Draw();
+		// シェーダプログラムの使用終了
+		glUseProgram(0);
+		//バッファを入れ替える
+		Window::SwapBuffers();
 
 	}
 

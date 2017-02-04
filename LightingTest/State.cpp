@@ -1,6 +1,7 @@
 #include "State.h"
 #include "GoalObj.h"
-#include "DynamicObj.h"
+#include "Player.h"
+#include "InputManager.h"
 
 //マップの広さ
 static const int WIDTH = 20;
@@ -22,7 +23,6 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 {
 	//Widthとheightを利用して地面を作る
 
-
 	//ステージパラメータの読み込み
 	const StageData& stageData = gStageData[mstageID];
 	//ブロックを作ってセットしていく
@@ -31,14 +31,25 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 	mGoalObj = new GoalObj();
 	mGoalObj->SetFlag(StaticObj::FLAG_GOAL);
 
+	DynamicObj* p = new Player();
+	//プレイヤーの配置
+
 	//敵の数とプレイヤーの数
 	mDynamicObjectNumber = 1 + stageData.enemyNumber;
-	mDynamicObjects = new DynamicObj[mDynamicObjectNumber];
+	mDynamicObjects = new DynamicObj*[mDynamicObjectNumber];
+	
+	//プレイヤー
+	mDynamicObjects[0] = p;
+	//配置
+	mDynamicObjects[0]->Set(0,2);
 
-	//プレイヤーの取得（？）
+	//敵
+	for (int i = 0; i < mDynamicObjectNumber; i++){
+		if (i>0){
 
-	//プレイヤーの配置
-	mDynamicObjects[0].Set(0, 0);
+			//配置
+		}
+	}
 }
 
 State::~State()
@@ -47,13 +58,17 @@ State::~State()
 }
 
 //各オブジェクトの描画
-void State::Draw()const{
-
+void State::Draw(){
+	for (int i = 0; i < mDynamicObjectNumber; i++){
+		mDynamicObjects[i]->Draw();
+	}
 }
 
 //各オブジェクトの更新
 void State::Update(){
-
+	for (int i = 0; i < mDynamicObjectNumber; i++){
+		mDynamicObjects[i]->Update();
+	}
 }
 
 //クリアしたかどうかのチェック

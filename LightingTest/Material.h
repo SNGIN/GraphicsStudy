@@ -23,7 +23,7 @@ public:
 
 	//引数ありのコンストラクタで材質の設定とシェーダーの選択をさせたい
 	//(ついでにメンバのシェーダクラスに情報を渡す)
-	Material(GLfloat *amb, GLfloat*diff, GLfloat *spec, GLfloat *shi,Shader &shader);
+	Material(Shader* shader);
 
 	void attachShader(Shader &shader){
 		this->m_shader = &shader;
@@ -33,7 +33,11 @@ public:
 		this->m_shader = shader;
 	}
 
-	void SetMaterial();
+	Shader* GetShader();
+
+	virtual void SetMaterial();
+	virtual void UseTexture(){};
+	virtual void SetTexLoc(){};
 
 };
 

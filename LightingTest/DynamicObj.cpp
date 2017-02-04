@@ -10,6 +10,6 @@ DynamicObj::~DynamicObj()
 {
 }
 
-void DynamicObj::Set(int x, int y){
-
+void DynamicObj::Set(GLfloat x, GLfloat y){
+	position.set(x, 0, y);
 }

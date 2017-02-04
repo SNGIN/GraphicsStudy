@@ -1,6 +1,7 @@
 #pragma once
 #include "Commonheader.h"
 #include "BufferBase.h"
+#include "Texture.h"
 
 //材質情報のシェーダーソースでの場所
 struct MaterialLoc
@@ -109,5 +110,7 @@ public:
 	}
 
 	//変換行列,mp=投影変換行列 mw モデルビュー変換行列
-	virtual void loadMatrix(const Matrix &mp, const Matrix &mw);
+	virtual void loadMatrix(Matrix mp, Matrix mw);
+
+	virtual void UseSimpleShader(Texture tex){};
 };

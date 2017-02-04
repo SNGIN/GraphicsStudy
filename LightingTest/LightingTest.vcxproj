@@ -80,12 +80,16 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Play.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ready.cpp" />
+    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Seaquence.cpp" />
     <ClCompile Include="SeaquenceController.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SimpleImageMaterial.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticObj.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -108,7 +112,9 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="Play.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ready.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="RefCounter.h" />
     <ClInclude Include="Seaquence.h" />
     <ClInclude Include="SeaquenceController.h" />
@@ -116,8 +122,10 @@
     <ClInclude Include="ShapeElements.h" />
     <ClInclude Include="ShapePoints.h" />
     <ClInclude Include="ShapeTriangle.h" />
+    <ClInclude Include="SimpleImageMaterial.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticObj.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -125,8 +133,8 @@
     <None Include="packages.config" />
     <None Include="lambert.frag" />
     <None Include="lambert.vert" />
-    <None Include="point.frag" />
-    <None Include="point.vert" />
+    <None Include="simpleTex.frag" />
+    <None Include="simpleTex.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

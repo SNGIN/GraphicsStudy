@@ -100,8 +100,8 @@ GLuint CreateShader(const char *vsrc, const char *fsrc, const char *gsrc,
 			glTransformFeedbackVaryings(program, nvarying, varyings, GL_SEPARATE_ATTRIBS);
 		}
 
-		//glBindAttribLocation(program, 0, "pv");
-		//glBindFragDataLocation(program, 0, "fc");
+		glBindAttribLocation(program, 0, "pv");
+		glBindFragDataLocation(program, 0, "fc");
 		//プログラムオブジェクトのリンク
 		glLinkProgram(program);
 	}
@@ -136,7 +136,7 @@ GLuint LoadShader(const char *vert, const char *frag, const char *geom,
 	return program;
 }
 
-void Shader::loadMatrix(const Matrix &mp, const Matrix &mw){
+void Shader::loadMatrix(Matrix mp, Matrix mw){
 	Matrix a = (mp * mw);
 	// 変換
 	glUniformMatrix4fv(loc_matrix.mc, 1, GL_FALSE, (mp * mw).get());

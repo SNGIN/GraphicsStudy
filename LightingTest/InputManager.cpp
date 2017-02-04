@@ -66,6 +66,7 @@ bool InputManager::CheckInputB(){
 
 //ビット演算でフラグ管理
 bool InputManager::CheckInputMoveUp(){
+	bool test = (mInputMoveFlag & FLAG_UP);
 	return ((mInputMoveFlag & FLAG_UP) != 0) ? true : false;
 }
 

@@ -14,4 +14,3 @@ private:
 	int mCount;
 	bool mStarted;
 };
-

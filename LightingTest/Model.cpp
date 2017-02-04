@@ -1,4 +1,5 @@
 #include "Model.h"
+#include "Window.h"
 
 // ƒxƒNƒgƒ‹
 struct vec
@@ -227,10 +228,11 @@ Model::~Model()
 }
 
 void Model::Draw(){
+
 	//•`‰æ
 	m_Elements->Draw();
 }
 
-void Model::MaterialSet(GLfloat(*amb), GLfloat(*diff), GLfloat(*spec), GLfloat *shi, Shader &shader){
-	m_Material = new Material(amb, diff, spec, shi,shader);
+void Model::MaterialSet(Material* mat){
+	m_Material=mat;
 }
