@@ -6,6 +6,7 @@
 
 Clear::Clear() :mCount(0)
 {
+	std::cout << "Clear" << std::endl;
 }
 
 
@@ -26,7 +27,6 @@ Boot* Clear::Update(GameSeaquenceController* controller){
 	}
 	//•`‰æ
 	controller->DrawState();
-	std::cout << "Clear" << std::endl;
 	++mCount;
 	return next;
 }

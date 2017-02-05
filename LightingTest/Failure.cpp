@@ -5,6 +5,8 @@
 
 Failure::Failure()
 {
+	std::cout << "failure" << std::endl;
+	mCount = 0;
 }
 
 
@@ -15,7 +17,7 @@ Failure::~Failure()
 //ƒ~ƒX•\¦
 Boot* Failure::Update(GameSeaquenceController* controller){
 	Boot* next = this;
-	if (mCount == 60){
+	if (mCount >= 60){
 		if (controller->LifeNumber() <= 0){
 			next = new GameOver;
 		}

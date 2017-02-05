@@ -13,6 +13,8 @@ mNextSeaquence(NEXT_NONE), mGameSeaquence(0)
 {
 	//Readyからスタート
 	mGameSeaquence = new Ready();
+
+	mLife = 2;
 }
 
 
@@ -44,7 +46,7 @@ Boot* GameSeaquenceController::Update(GrandController*){
 }
 
 bool GameSeaquenceController::HasFinalStageCleard()const{
-	return(mStageID > FINALSTAGE);
+	return(mStageID >= FINALSTAGE);
 }
 
 State* GameSeaquenceController::GetState(){
@@ -56,6 +58,7 @@ void GameSeaquenceController::DrawState()const{
 }
 
 void GameSeaquenceController::StartLoading(){
+	//TODO:読み込みが重いのでリセットとかにするといい
 	Common::Delete(mState);
 	mState = new State(mStageID);
 }

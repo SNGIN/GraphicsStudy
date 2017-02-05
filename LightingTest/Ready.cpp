@@ -19,18 +19,19 @@ Boot* Ready::Update(GameSeaquenceController* controller){
 	if (!mStarted){
 		controller->StartLoading();
 		mStarted = true;
+		//レディ
+		std::cout << "Ready" << std::endl;
 	}
 
 	if (mCount >= 120){
+		//ゴー
+		std::cout << "Go" << std::endl;
 		next = new Play;
 	}
 	else if (mCount >= 60){
-		//ゴー
-		std::cout << "Go" << std::endl;
 	}
 	else{
-		//レディ
-		std::cout << "Ready" << std::endl;
+
 	}
 	//描画
 	controller->DrawState();

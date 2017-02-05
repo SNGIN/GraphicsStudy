@@ -5,6 +5,7 @@
 
 Pause::Pause()
 {
+	std::cout << "Pause" << std::endl;
 }
 
 
@@ -18,7 +19,6 @@ Boot* Pause::Update(GameSeaquenceController* controller){
 	//t:タイトルへ
 	//b:ステージ選択
 	//r:リセット
-	std::cout << "Pause" << std::endl;
 	if (InputManager::CheckInputP()){
 		next = new Play;
 	}

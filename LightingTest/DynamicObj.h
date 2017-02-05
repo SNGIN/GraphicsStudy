@@ -11,7 +11,8 @@ protected:
 public:
 	DynamicObj();
 	~DynamicObj();
-	virtual void Set(GLfloat x, GLfloat y);
+	vector3 Get();
+	void Set(GLfloat x, GLfloat y);
 	virtual DynamicObj* Draw(){ return 0; };
 	virtual DynamicObj* Update(){ return 0; };
 };

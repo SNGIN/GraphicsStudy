@@ -225,6 +225,8 @@ Model::Model(const char *name, bool normalize){
 
 Model::~Model()
 {
+	Common::Delete(m_Elements);
+	Common::Delete(m_Material);
 }
 
 void Model::Draw(){

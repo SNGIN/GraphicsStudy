@@ -17,6 +17,8 @@ Title::Title()
 	//マテリアル定義
 	SimpleImageMaterial* mat = new SimpleImageMaterial(titleShader,tex);
 	mrect->SetMaterial(mat);
+
+	std::cout << "Title" << std::endl;
 }
 
 
@@ -29,7 +31,6 @@ Title::~Title()
 Boot* Title::Update(SeaquenceController* controller){
 	Boot* next = this;
 
-	std::cout << "Title" << std::endl;
 	mrect->Draw();
 	if (InputManager::CheckInputSpace()){
 		next = new GameSeaquenceController();

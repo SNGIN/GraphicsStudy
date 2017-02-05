@@ -25,5 +25,9 @@ private:
 	int mstageID;
 
 	GoalObj* mGoalObj;
+
+	//check—p•Ï”
+	bool clear = false;
+	bool miss = false;
 };
 

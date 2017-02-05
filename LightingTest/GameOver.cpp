@@ -4,7 +4,8 @@
 
 GameOver::GameOver()
 {
-
+	std::cout << "GameOver" << std::endl;
+	mCount = 0;
 }
 
 
@@ -19,7 +20,6 @@ Boot* GameOver::Update(SeaquenceController*){
 		next = new Title;
 	}
 	//•`‰æ
-	std::cout << "GameOver" << std::endl;
 
 	++mCount;
 	return next;

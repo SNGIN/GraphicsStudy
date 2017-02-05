@@ -16,7 +16,7 @@ class Material
 
 public:
 	Material(){};
-	~Material(){};
+	~Material();
 
 	//使用するシェーダ
 	Shader *m_shader;

@@ -7,6 +7,7 @@
 
 Play::Play()
 {
+	std::cout << "Play" << std::endl;
 }
 
 
@@ -21,19 +22,8 @@ Boot* Play::Update(GameSeaquenceController* controller){
 	//入力のチェック
 	InputManager::CheckInputMove();
 
-	std::cout << "Play" << std::endl;
-
 	bool cleared = state->hasCleared();
 	bool missed = state->hasMissed();
-	
-	//-------------確認用
-	/*if (InputManager::CheckInputMoveUp()){
-		cleared = true;
-	}
-	if (InputManager::CheckInputB()){
-		missed = true;
-	}*/
-	//-------------確認用
 
 	if (cleared){
 		controller->GotoNextStage();

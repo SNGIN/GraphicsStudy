@@ -18,6 +18,7 @@ Player::Player()
 
 Player::~Player()
 {
+	Common::Delete(m_bunny);
 }
 
 DynamicObj* Player::Update(){

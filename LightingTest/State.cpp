@@ -54,6 +54,7 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 
 State::~State()
 {
+	Common::Delete(*mDynamicObjects);
 	Common::Delete(mDynamicObjects);
 }
 
@@ -69,15 +70,26 @@ void State::Update(){
 	for (int i = 0; i < mDynamicObjectNumber; i++){
 		mDynamicObjects[i]->Update();
 	}
+
+	if (mDynamicObjects[0]->Get().x() < -2.5 || mDynamicObjects[0]->Get().x() > 2.5){
+		//TODO:本来はゴールオブジェクトに触れたら
+		miss = true;
+	}
+
+	if (mDynamicObjects[0]->Get().z() < -2.5){
+		//TODO:本来はゴールオブジェクトに触れたら
+		clear = true;
+	}
+
 }
 
 //クリアしたかどうかのチェック
 bool State::hasCleared()const{
-	return mGoalObj->CheckGoal();
+	return clear;
 }
 
 //ミスしたかどうか
 bool State::hasMissed()const{
 	//落ちたらミスの判定を入れる
-	return false;
+	return miss;
 }

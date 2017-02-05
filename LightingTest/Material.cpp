@@ -27,6 +27,10 @@ Material::Material(Shader* shader)
 	SetMaterial();
 }
 
+Material::~Material(){
+	Common::Delete(m_shader);
+}
+
 void Material::SetMaterial(){
 	glUniform4fv(m_shader->loc_material.kamb, 1, m_amb);
 	glUniform4fv(m_shader->loc_material.kdiff, 1, m_diff);

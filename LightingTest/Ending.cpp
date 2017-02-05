@@ -4,6 +4,8 @@
 
 Ending::Ending()
 {
+
+	std::cout << "Ending" << std::endl;
 }
 
 
@@ -16,11 +18,9 @@ Ending::~Ending()
 Boot* Ending::Update(SeaquenceController*){
 	Boot* next = this;
 	if (mCount == 120){
-		//next = new Title;
+		next = new Title;
 	}
 	//•`‰æ
-
-	std::cout << "Ending" << std::endl;
 
 	++mCount;
 	return next;
