@@ -49,6 +49,10 @@ bool GameSeaquenceController::HasFinalStageCleard()const{
 	return(mStageID >= FINALSTAGE);
 }
 
+Physics* GameSeaquenceController::GetPhysics(){
+	return m_Physics;
+}
+
 State* GameSeaquenceController::GetState(){
 	return mState;
 }
@@ -60,6 +64,9 @@ void GameSeaquenceController::DrawState()const{
 void GameSeaquenceController::StartLoading(){
 	//TODO:読み込みが重いのでリセットとかにするといい
 	Common::Delete(mState);
+	Common::Delete(m_Physics);
+
+	m_Physics = new Physics();
 	mState = new State(mStageID);
 }
 

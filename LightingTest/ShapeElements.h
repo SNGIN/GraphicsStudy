@@ -2,7 +2,7 @@
 #include "ShapeTriangle.h"
 
 //Elements
-class ShapeElements:ShapeTriangle
+class ShapeElements:public ShapeTriangle
 {
 	Buffer<GLuint[3]> index;
 

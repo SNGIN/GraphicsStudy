@@ -6,28 +6,6 @@
 #include "SeaquenceController.h"
 #include "InputManager.h"
 
-
-//材質の色
-static GLfloat ambColor[4] = { 0.6f, 0.6f, 0.6f, 1.0f }; 
-static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-static GLfloat shiness = 30.0f;
-
-//光源特性
-/*struct Light
-{
-	GLfloat ambient[4];
-	GLfloat diffuse[4];
-	GLfloat specular[4];
-	GLfloat position[4];
-
-	// シェーダーソースでの場所
-	GLint pl;         // 光源位置の uniform 変数の場所
-	GLint lamb;       // 光源強度の環境光成分の uniform 変数の場所
-	GLint ldiff;      // 光源強度の拡散反射光成分の uniform 変数の場所
-	GLint lspec;      // 光源強度の鏡面反射光成分の uniform 変数の場所
-};*/
-
 static void Cleanup(void){
 	//GLFWの終了処理
 	glfwTerminate();
@@ -81,8 +59,73 @@ void InitConfig()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void Draw(){
+// 球のデータの分割数
+#define SLICES 64
+#define STACKS 32
 
+// 球のデータの頂点数と面数
+#define VERTICES ((SLICES + 1) * (STACKS + 1))
+#define FACES (SLICES * STACKS * 2)
+
+//
+// 球のデータの作成
+//
+static void makeSphere(float radius, int slices, int stacks,
+	GLfloat(*pv)[3], GLfloat(*nv)[3], GLfloat(*tv)[2], GLuint(*f)[3])
+{
+	// 頂点の位置とテクスチャ座標を求める
+	for (int k = 0, j = 0; j <= stacks; ++j)
+	{
+		float t = (float)j / (float)stacks;
+		float ph = 3.141593f * t;
+		float y = cosf(ph);
+		float r = sinf(ph);
+
+		for (int i = 0; i <= slices; ++i)
+		{
+			float s = (float)i / (float)slices;
+			float th = -2.0f * 3.141593f * s;
+			float x = r * cosf(th);
+			float z = r * sinf(th);
+
+			// 頂点の座標値
+			pv[k][0] = x * radius;
+			pv[k][1] = y * radius;
+			pv[k][2] = z * radius;
+
+			// 頂点の法線ベクトル
+			nv[k][0] = x;
+			nv[k][1] = y;
+			nv[k][2] = z;
+
+			// 頂点のテクスチャ座標値
+			tv[k][0] = s;
+			tv[k][1] = t;
+
+			++k;
+		}
+	}
+
+	// 面の指標を求める
+	for (int k = 0, j = 0; j < stacks; ++j)
+	{
+		for (int i = 0; i < slices; ++i)
+		{
+			int count = (slices + 1) * j + i;
+
+			// 上半分の三角形
+			f[k][0] = count;
+			f[k][1] = count + slices + 2;
+			f[k][2] = count + 1;
+			++k;
+
+			// 下半分の三角形
+			f[k][0] = count;
+			f[k][1] = count + slices + 1;
+			f[k][2] = count + slices + 2;
+			++k;
+		}
+	}
 }
 
 int main(){
@@ -129,12 +172,6 @@ int main(){
 		//シーケンス処理のチェック
 		SeaquenceController::instance()->Update();
 
-		//シェーダの使用
-		//m_bunny->GetMaterial()->m_shader->Use();
-		//m_bunny->GetMaterial()->m_shader->loadMatrix(Window::getMp(), Window::ReturnMV()*Translate(0.0f, 0.0f, -2.0f));
-
-		//描画
-		//m_bunny->Draw();
 		// シェーダプログラムの使用終了
 		glUseProgram(0);
 		//バッファを入れ替える

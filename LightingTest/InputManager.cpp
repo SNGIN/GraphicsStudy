@@ -2,6 +2,7 @@
 #include "InputManager.h"
 
 GLFWwindow* InputManager::myWindow = 0;
+TrackBall* InputManager::m_trackBall = 0;
 unsigned int InputManager::mInputButtonFlag = 0;
 unsigned int InputManager::mInputMoveFlag = 0;
 
@@ -14,8 +15,11 @@ bool InputManager::PressP = false;
 //ウィンドウ、キーボードの登録
 void InputManager::SetMyWindow(GLFWwindow* w){
 	myWindow = w;
-	// キー入力を処理するコールバック関数を設定。
-	glfwSetKeyCallback(w, keyCallback);
+	m_trackBall = new TrackBall();
+	// キー入力を処理するコールバック関数を設定
+	glfwSetKeyCallback(w, KeyCallback);
+	//マウス入力を処理するコールバック関数を設定
+	glfwSetMouseButtonCallback(w, MouseCallback);
 }
 
 //ビット演算でフラグ管理
@@ -114,7 +118,7 @@ void InputManager::CheckInputMove(){
 }
 
 //キーボードの状態を見てボタン入力をフラグ判定
-void InputManager::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+void InputManager::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_B){
 		if (action == GLFW_PRESS && !PressB){
@@ -165,4 +169,43 @@ void InputManager::keyCallback(GLFWwindow *window, int key, int scancode, int ac
 			PressSpace = false;
 		}
 	}
+}
+
+//
+// マウスボタン操作時の処理
+//
+void InputManager::MouseCallback(GLFWwindow *window, int button, int action, int mods)
+{
+	// マウスの現在位置を取得する
+	double x, y;
+	glfwGetCursorPos(window, &x, &y);
+
+	switch (button)
+	{
+	case GLFW_MOUSE_BUTTON_LEFT:
+		break;
+	case GLFW_MOUSE_BUTTON_MIDDLE:
+		if (action != GLFW_RELEASE)
+		{
+			// ボタン押下
+			m_trackBall->Start(x, y);
+		}
+		else
+		{
+			// ボタン開放
+			m_trackBall->Stop(x, y);
+		}
+		break;
+	case GLFW_MOUSE_BUTTON_RIGHT:
+		break;
+	default:
+		break;
+	}
+}
+
+void InputManager::CheckInputMouseDrag(GLFWwindow *window){
+	// マウスの現在位置を取得する
+	double x, y;
+	glfwGetCursorPos(window, &x, &y);
+	m_trackBall->Motion(x,y);
 }

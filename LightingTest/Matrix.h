@@ -327,7 +327,17 @@ Matrix &loadScale(const GLfloat *s)
 //! \brief x ²’†S‚Ì‰ñ“]‚Ì•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param a ‰ñ“]Šp.
 //!   \return İ’è‚µ‚½•ÏŠ·s—ñ.
-Matrix &loadRotateX(GLfloat a);
+Matrix &loadRotateX(GLfloat a){
+	GLfloat c = cos(a);
+	GLfloat s = sin(a);
+
+	array[0] = 1.0f; array[1] = 0.0f; array[2] = 0.0f; array[3] = 0.0f;
+	array[4] = 0.0f; array[5] = c;    array[6] = s;    array[7] = 0.0f;
+	array[8] = 0.0f; array[9] = -s;   array[10] = c;    array[11] = 0.0f;
+	array[12] = 0.0f; array[13] = 0.0f; array[14] = 0.0f; array[15] = 1.0f;
+
+	return *this;
+}
 
 //! \brief y ²’†S‚Ì‰ñ“]‚Ì•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param a ‰ñ“]Šp.

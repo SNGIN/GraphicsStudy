@@ -1,5 +1,7 @@
 #pragma once
 #include "Seaquence.h"
+#include "Physics.h"
+
 class State;
 class SeaquenceController;
 class GameSeaquence;
@@ -22,6 +24,8 @@ public:
 
 	Boot* Update(GrandController*);
 	State* GetState();
+	Physics* GetPhysics();
+
 	void DrawState()const;//ÉQÅ[ÉÄÇï`âÊÇ∑ÇÈ
 	bool HasFinalStageCleard()const;
 	void StartLoading();
@@ -38,4 +42,6 @@ private:
 	NextSeaquence mNextSeaquence;
 
 	GameSeaquence* mGameSeaquence;
+
+	Physics* m_Physics;
 };

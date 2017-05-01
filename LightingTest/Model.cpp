@@ -234,7 +234,3 @@ void Model::Draw(){
 	//•`‰æ
 	m_Elements->Draw();
 }
-
-void Model::MaterialSet(Material* mat){
-	m_Material=mat;
-}

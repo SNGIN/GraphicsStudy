@@ -40,6 +40,8 @@ Boot* Play::Update(GameSeaquenceController* controller){
 
 	//オブジェクトの更新
 	state->Update();
+	//物理シミュレーションの更新
+
 	//描画
 	state->Draw();
 

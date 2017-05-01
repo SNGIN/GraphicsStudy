@@ -169,7 +169,7 @@ public:
 	}
 
 	//! \brief ポイントの描画.
-	virtual void draw(GLint first = 0, GLsizei count = 0) const{
+	virtual void Draw(GLint first = 0, GLsizei count = 0) const{
 		// 頂点配列オブジェクトを指定する
 		Use();
 

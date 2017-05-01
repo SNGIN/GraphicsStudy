@@ -1,7 +1,17 @@
 #pragma once
 #include "Commonheader.h"
+#include "Light.h"
 #include "BufferBase.h"
 #include "Texture.h"
+
+// 光源
+struct LightLoc
+{
+	GLint lamb;       // 環境光の反射光の uniform 変数の場所
+	GLint ldiff;      // 拡散反射光の uniform 変数の場所
+	GLint lspec;      // 鏡面反射光の uniform 変数の場所
+	GLint pl;       // 位置の uniform 変数の場所
+};
 
 //材質情報のシェーダーソースでの場所
 struct MaterialLoc
@@ -42,11 +52,11 @@ class Shader :public BufferBase{
 
 	//シェーダープログラム名
 	GLuint program;
-
 public:
 
 	MaterialLoc loc_material;
 	MatrixLoc loc_matrix;
+	LightLoc loc_light;
 
 	//デストラクタ
 	~Shader(){

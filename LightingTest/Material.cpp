@@ -1,22 +1,25 @@
 #include "Material.h"
 
-//材質の色
-static GLfloat ambColor[4] = { 0.6f, 0.6f, 0.6f, 1.0f };
-static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-static GLfloat shiness = 30.0f;
 
-Material::Material(Shader* shader)
+Material::Material(Shader* shader,GLfloat* ambColor,GLfloat* diffColor,GLfloat* specColor,GLfloat* shiness)
 {
+	m_Light = new Light();
 	// 引数に初期値を設定する
 	this->m_amb = ambColor;
 	this->m_diff = diffColor;
 	this->m_spec = specColor;
-	this->m_shi = &shiness;
+	this->m_shi = shiness;
 
 	//シェーダーの選択
 	attachShader(shader);
 	shader->Use();
+
+	//光パラメータのuniformの場所
+	shader->loc_light.lamb = glGetUniformLocation(shader->GetProgramName(), "lamb");
+	shader->loc_light.ldiff = glGetUniformLocation(shader->GetProgramName(), "ldiff");
+	shader->loc_light.lspec = glGetUniformLocation(shader->GetProgramName(), "lspec");
+	shader->loc_light.pl = glGetUniformLocation(shader->GetProgramName(), "pl");
+	SetLight();
 
 	// 材質のパラメータの uniform 変数の場所をセットする
 	shader->loc_material.kamb = glGetUniformLocation(shader->GetProgramName(), "kamb");
@@ -28,7 +31,20 @@ Material::Material(Shader* shader)
 }
 
 Material::~Material(){
+	Common::Delete(m_amb);
+	Common::Delete(m_diff);
+	Common::Delete(m_spec);
+	Common::Delete(m_shi);
+
 	Common::Delete(m_shader);
+	Common::Delete(m_Light);
+}
+
+void Material::SetLight(){
+	glUniform4fv(m_shader->loc_light.lamb, 1, m_Light->GetAmb());
+	glUniform4fv(m_shader->loc_light.ldiff, 1, m_Light->GetDiff());
+	glUniform4fv(m_shader->loc_light.lspec, 1, m_Light->GetSpec());
+	glUniform4fv(m_shader->loc_light.pl, 1, m_Light->GetPos());
 }
 
 void Material::SetMaterial(){

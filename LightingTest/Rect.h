@@ -1,10 +1,10 @@
 #pragma once
 #include "Commonheader.h"
-#include "ShapeTriangle.h"
+#include "ShapeObject.h"
 #include "Material.h"
 #include "Texture.h"
 
-class Rect
+class Rect:public ShapeObject
 {
 public:
 	Rect();
@@ -12,11 +12,11 @@ public:
 	~Rect();
 
 	void SetMaterial(Material *mat);
+	ShapeTriangle* mtriangle;
 
-	void Draw();
+	virtual void Draw();
 
 private:
-	ShapeTriangle* mtriangle;
 	Material* mMaterial;
 
 	GLfloat uv[4][2];

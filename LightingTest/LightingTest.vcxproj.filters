@@ -58,6 +58,18 @@
     <Filter Include="ヘッダー ファイル\Graphic\Material">
       <UniqueIdentifier>{4e8644ae-1f24-4bcd-87ee-d35ff1f86f1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Common\Controller">
+      <UniqueIdentifier>{6c994f44-968c-40df-8c72-0effc27463ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Physics">
+      <UniqueIdentifier>{0d54965f-4f73-4088-b661-a9fab50b6028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Common\Controller">
+      <UniqueIdentifier>{bd1f6420-56b9-4bd9-bf31-49c4071f6a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Physics">
+      <UniqueIdentifier>{41716cc5-538a-49eb-a017-c80b50312a28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Model.cpp">
@@ -74,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="GameSeaquence.cpp">
       <Filter>ソース ファイル\Game\GameSeaquence</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
     <ClCompile Include="Clear.cpp">
       <Filter>ソース ファイル\Game\GameSeaquence</Filter>
@@ -105,9 +114,6 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>ソース ファイル\Game\Seaquence</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>ソース ファイル\Game</Filter>
-    </ClCompile>
     <ClCompile Include="GameSeaquenceController.cpp">
       <Filter>ソース ファイル\Game\GameSeaquence</Filter>
     </ClCompile>
@@ -135,8 +141,32 @@
     <ClCompile Include="Rect.cpp">
       <Filter>ソース ファイル\Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="TrackBall.cpp">
+      <Filter>ソース ファイル\Common\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>ソース ファイル\Common\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>ソース ファイル\Game\Seaquence</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereObject.cpp">
+      <Filter>ソース ファイル\Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeObject.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvexMesh.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +257,6 @@
     <ClInclude Include="Texture.h">
       <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
-    </ClInclude>
     <ClInclude Include="SimpleImageMaterial.h">
       <Filter>ヘッダー ファイル\Graphic\Material</Filter>
     </ClInclude>
@@ -239,8 +266,53 @@
     <ClInclude Include="Material.h">
       <Filter>ヘッダー ファイル\Graphic\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>ヘッダー ファイル\Graphic</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereObject.h">
+      <Filter>ヘッダー ファイル\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeObject.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackBall.h">
+      <Filter>ヘッダー ファイル\Common\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>ヘッダー ファイル\Common\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsMathBase.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvexMesh.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsShape.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsState.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyElements.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsInclude.h">
+      <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +327,12 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="simpleTex.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Tile.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Tile.frag">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

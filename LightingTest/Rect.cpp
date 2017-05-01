@@ -73,6 +73,6 @@ void Rect::Draw(){
 		//”z’u
 		mMaterial->m_shader->loadMatrix(Window::getMp(), Window::ReturnMV()*Translate(0.0f, 0.0f, 0.0f));
 		//•`‚­
-		mtriangle->draw();
+		mtriangle->Draw();
 	}
 }

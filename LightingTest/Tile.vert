@@ -2,10 +2,10 @@
 #extension GL_ARB_explicit_attrib_location : enable
 
 // 光源
-uniform vec4 lamb;       // 環境光成分
-uniform vec4 ldiff;       // 拡散反射光成分
+uniform vec4 pl;                                    // 位置
+uniform vec4 lamb;                                  // 環境光成分
+uniform vec4 ldiff;                                 // 拡散反射光成分
 uniform vec4 lspec;                                 // 鏡面反射光成分
-uniform vec4 pl;          // 位置
 
 // 材質
 uniform vec4 kamb;                                  // 環境光の反射係数
@@ -17,6 +17,7 @@ uniform float kshi;                                 // 輝き係数
 uniform mat4 mw;                                    // 視点座標系への変換行列
 uniform mat4 mc;                                    // クリッピング座標系への変換行列
 uniform mat4 mg;                                    // 法線ベクトルの変換行列
+uniform mat4 ms;                                    // シャドウマップ用の変換行列
 
 // 頂点属性
 layout (location = 0) in vec4 pv;                   // ローカル座標系の頂点位置
@@ -26,13 +27,11 @@ layout (location = 1) in vec4 nv;                   // 頂点の法線ベクトル
 out vec4 iamb;                                      // 環境光の反射光強度
 out vec4 idiff;                                     // 拡散反射光強度
 out vec4 ispec;                                     // 鏡面反射光強度
-
-//デプスマップのテクスチャ座標
-out vec4 dtc; 
+out vec2 ctex;                                      // カラーマップ用のテクスチャ座標
+out vec4 dtex;                                      // デプスマップ用のテクスチャ座標
 
 void main(void)
 {
-
   vec4 p = mw * pv;                                 // 視点座標系の頂点の位置
   vec3 v = -normalize(p.xyz / p.w);                 // 視線ベクトル
   vec3 l = normalize((pl * p.w - p * pl.w).xyz);    // 光線ベクトル
@@ -43,5 +42,8 @@ void main(void)
   idiff = max(dot(n, l), 0.0) * kdiff * ldiff;
   ispec = pow(max(dot(n, h), 0.0), kshi) * kspec * lspec;
 
+  ctex = pv.xy;
+  dtex = ms * pv;
+  
   gl_Position = mc * pv;
 }

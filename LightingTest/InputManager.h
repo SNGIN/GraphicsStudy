@@ -1,5 +1,7 @@
 #pragma once
 #include "Commonheader.h"
+#include "Window.h"
+#include "TrackBall.h"
 
 //入力を管理するマネージャー
 static class InputManager
@@ -33,8 +35,15 @@ public:
 
 	static void SetMyWindow(GLFWwindow* w);
 	static void CheckInputMove();
+	static void CheckInputMouseDrag(GLFWwindow *window);
 
-	static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+	static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+	static void MouseCallback(GLFWwindow *window, int button, int action, int mods);
+
+	static TrackBall* GetTrackBall(){
+		CheckInputMouseDrag(myWindow);
+		return m_trackBall;
+	}
 
 private:
 	static GLFWwindow* myWindow;
@@ -45,4 +54,5 @@ private:
 
 	static unsigned int mInputButtonFlag;
 	static unsigned int mInputMoveFlag;
+	static TrackBall* m_trackBall;
 };

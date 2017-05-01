@@ -13,7 +13,7 @@ class Material
 	//輝き係数
 	GLfloat*m_shi;
 
-
+	Light* m_Light;
 public:
 	Material(){};
 	~Material();
@@ -23,7 +23,7 @@ public:
 
 	//引数ありのコンストラクタで材質の設定とシェーダーの選択をさせたい
 	//(ついでにメンバのシェーダクラスに情報を渡す)
-	Material(Shader* shader);
+	Material(Shader* shader, GLfloat* ambColor, GLfloat* diffColor, GLfloat* specColor, GLfloat* shiness);
 
 	void attachShader(Shader &shader){
 		this->m_shader = &shader;
@@ -35,6 +35,7 @@ public:
 
 	Shader* GetShader();
 
+	virtual void SetLight();
 	virtual void SetMaterial();
 	virtual void UseTexture(){};
 	virtual void SetTexLoc(){};

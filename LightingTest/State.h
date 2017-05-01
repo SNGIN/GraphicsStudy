@@ -18,13 +18,11 @@ public:
 	bool hasCleared()const;
 	bool hasMissed()const;
 private:
-	StaticObj* mStaticObjects;
+	StaticObj** mStaticObjects;
 	DynamicObj** mDynamicObjects;
 	int mStaticObjectNumber;
 	int mDynamicObjectNumber;
 	int mstageID;
-
-	GoalObj* mGoalObj;
 
 	//checkópïœêî
 	bool clear = false;
