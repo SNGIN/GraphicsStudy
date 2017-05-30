@@ -31,7 +31,7 @@ public:
 	//デストラクタ
 	virtual ~Window();
 
-	static void CreateWindow(int width, int height, const char *title);
+	static void CreateWindowStart(int width, int height, const char *title);
 
 	//ウィンドウを閉じるべきかを判定する
 	static int ShouldClose(){

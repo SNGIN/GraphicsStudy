@@ -135,7 +135,7 @@ int main(){
 	}
 
 	//ウインドウを作成する
-	Window::CreateWindow(1024, 768, "Test!");
+	Window::CreateWindowStart(1024, 768, "Test!");
 
 	//GLEWの初期化
 	if (!Initialize_GLEW()){

@@ -26,7 +26,7 @@ Boot* Clear::Update(GameSeaquenceController* controller){
 		}
 	}
 	//•`‰æ
-	controller->DrawState();
+	controller->DrawStateGame();
 	++mCount;
 	return next;
 }

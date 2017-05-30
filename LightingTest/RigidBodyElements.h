@@ -1,3 +1,4 @@
+#pragma once
 #include "PhysicsMathBase.h"
 
 struct RigidBodyElements{

@@ -1,3 +1,4 @@
+#pragma once
 #include "PhysicsMathBase.h"
 
 #define MAX_LINEAR_VELOCITY		340.0f

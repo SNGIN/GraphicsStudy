@@ -19,7 +19,7 @@ void GetProjection(float &pmin, float &pmax,const ConvexMesh *convexMesh,const V
 }
 bool CreateConvexMesh(ConvexMesh *convexMesh,
 	const float *vertices, unsigned int numVertices,
-	const unsigned short *indices, unsigned int numIndices,
+	const GLuint *indices, unsigned int numIndices,
 	const Vector3 &scale = Vector3(1.0f))
 {
 	//不正データのチェック
@@ -28,7 +28,7 @@ bool CreateConvexMesh(ConvexMesh *convexMesh,
 	assert(indices);
 	assert(dot(scale, scale)>0.0f);
 
-	//最大頂点数を超えたらダメ
+	//最大頂点数を超えたらダメ(TODO:大きい頂点数は？(現在はstackoverflowになる))
 	if (numVertices > CONVEX_MESH_MAX_VERTICES || numIndices > CONVEX_MESH_MAX_FACETS * 3) {
 		return false;
 	}

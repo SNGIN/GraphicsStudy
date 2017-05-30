@@ -32,21 +32,37 @@ Rect::Rect(GLfloat width, GLfloat height){
 		uv[v][0] = tmpuv[v][0];
 		uv[v][1] = tmpuv[v][1];
 
-		pos[v][0] = p[v][0] * width;
-		pos[v][1] = p[v][1] * height;
-		pos[v][2] = 0.0f;
+		m_vertPos[v][0] = p[v][0] * width;
+		m_vertPos[v][1] = p[v][1] * height;
+		m_vertPos[v][2] = 0.0f;
 
 		norm[v][0] = 0.0f;
 		norm[v][1] = 0.0f;
 		norm[v][2] = 1.0f;
 	}
 
-	mtriangle = new ShapeTriangle(4, pos, norm, GL_TRIANGLE_FAN);
+	//‚Ç‚Ì’¸“_‚ª‚Ç‚Ì–Ê‚ð•\‚·‚Ì‚©
+	m_faces[0] = 0; m_faces[1] = 1; m_faces[2] = 2;
+	m_faces[3] = 0; m_faces[4] = 3; m_faces[5] = 2;
+
+	mtriangle = new ShapeTriangle(4, m_vertPos, norm, GL_TRIANGLE_FAN);
 }
 
 Rect::~Rect()
 {
 	Common::Delete(mtriangle);
+}
+
+GLfloat* Rect::GetVertPos(){
+	return *m_vertPos;
+}
+
+GLfloat* Rect::GetVertPos(int i){
+	return m_vertPos[i];
+}
+
+GLuint* Rect::GetFace(){
+	return m_faces;
 }
 
 void Rect::SetMaterial(Material* mat){

@@ -66,17 +66,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Broadphase.cpp" />
     <ClCompile Include="Clear.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ConvexConvexContact.cpp" />
     <ClCompile Include="ConvexMesh.cpp" />
+    <ClCompile Include="DetectCollision.cpp" />
     <ClCompile Include="DynamicObj.cpp" />
     <ClCompile Include="Ending.cpp" />
     <ClCompile Include="Failure.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameSeaquence.cpp" />
     <ClCompile Include="GameSeaquenceController.cpp" />
+    <ClCompile Include="GetClosetFunction.cpp" />
     <ClCompile Include="GoalObj.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Intergrate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -91,6 +97,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShapeObject.cpp" />
     <ClCompile Include="SimpleImageMaterial.cpp" />
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="SphereObject.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticObj.cpp" />
@@ -100,13 +107,18 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Allocator.h" />
+    <ClInclude Include="BallJoint.h" />
     <ClInclude Include="Boot.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferBase.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Commonheader.h" />
+    <ClInclude Include="Contact.h" />
     <ClInclude Include="ConvexMesh.h" />
+    <ClInclude Include="Constraint.h" />
+    <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="DynamicObj.h" />
     <ClInclude Include="Ending.h" />
     <ClInclude Include="Failure.h" />
@@ -120,6 +132,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicsInclude.h" />
@@ -141,12 +154,15 @@
     <ClInclude Include="ShapePoints.h" />
     <ClInclude Include="ShapeTriangle.h" />
     <ClInclude Include="SimpleImageMaterial.h" />
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="SphereObject.h" />
+    <ClInclude Include="Solverbody.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticObj.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TrackBall.h" />
+    <ClInclude Include="VectorFunction.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

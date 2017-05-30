@@ -48,12 +48,12 @@ bool Model::FileLoad(const char *name, GLuint &nv, GLfloat(*&pos)[3], GLfloat(*&
 			str >> v.x >> v.y >> v.z;
 
 			// 位置の最大値と最小値を求める (AABB)
-			xmin = std::min(xmin, v.x);
-			xmax = std::max(xmax, v.x);
-			ymin = std::min(ymin, v.y);
-			ymax = std::max(ymax, v.y);
-			zmin = std::min(zmin, v.z);
-			zmax = std::max(zmax, v.z);
+			xmin = min(xmin, v.x);
+			xmax = max(xmax, v.x);
+			ymin = min(ymin, v.y);
+			ymax = max(ymax, v.y);
+			zmin = min(zmin, v.z);
+			zmax = max(zmax, v.z);
 
 			// 頂点データを保存する
 			_pos.push_back(v);

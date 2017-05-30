@@ -1,6 +1,8 @@
 #pragma once
 #include "Commonheader.h"
 #include "GoalObj.h"
+#include "GameSeaquenceController.h"
+#include "Physics.h"
 
 class StaticObj;
 class DynamicObj;
@@ -9,14 +11,19 @@ class DynamicObj;
 class State
 {
 public:
+	State(){}
 	State(int stageID);
 	~State();
 
+	void PhysicsUpdate();
 	void Update();
 	void Draw();
 	//ŠO‚©‚ç“n‚³‚ê‚éî•ñ
 	bool hasCleared()const;
 	bool hasMissed()const;
+
+	Physics* GetPhysics();
+
 private:
 	StaticObj** mStaticObjects;
 	DynamicObj** mDynamicObjects;
@@ -27,5 +34,7 @@ private:
 	//check—p•Ï”
 	bool clear = false;
 	bool miss = false;
+
+	Physics* m_Physics;
 };
 

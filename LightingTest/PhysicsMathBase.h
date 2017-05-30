@@ -5,10 +5,11 @@
 #include <float.h>
 #include <windows.h>
 #include "vectormath_aos.h"
+#include "quat_aos.h"
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#define CLAMP(v,a,b) EPX_MAX(a,EPX_MIN(v,b))
+#define CLAMP(v,a,b) MAX(a,MIN(v,b))
 #define PI		3.14159265358979f
 #define EPSILON	1e-5f
 

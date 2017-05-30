@@ -1,9 +1,9 @@
 #pragma once
 #include "PhysicsMathBase.h"
 
-#define CONVEX_MESH_MAX_VERTICES	34
-#define CONVEX_MESH_MAX_EDGES		96
-#define CONVEX_MESH_MAX_FACETS		64
+#define CONVEX_MESH_MAX_VERTICES	170
+#define CONVEX_MESH_MAX_EDGES		480
+#define CONVEX_MESH_MAX_FACETS		320
 
 /// エッジの種類
 enum EdgeType {
@@ -67,7 +67,7 @@ void GetProjection(
 /// @return 凸メッシュの作成に成功した場合はtrueを返す。
 bool CreateConvexMesh(ConvexMesh *convexMesh,
 	const float *vertices, unsigned int numVertices,
-	const unsigned short *indices, unsigned int numIndices,
+	const GLuint *indices, unsigned int numIndices,
 	const Vector3 &scale);
 
 

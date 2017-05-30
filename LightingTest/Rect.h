@@ -16,10 +16,17 @@ public:
 
 	virtual void Draw();
 
+	GLfloat* GetVertPos();
+	GLfloat* GetVertPos(int i);
+	GLuint* GetFace();
+
 private:
 	Material* mMaterial;
 
 	GLfloat uv[4][2];
+
+	GLfloat m_vertPos[4][3];
+	GLuint m_faces[6];
 
 	//uv座標のための頂点配列、バッファオブジェクト
 	GLuint vao;

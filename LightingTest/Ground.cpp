@@ -8,8 +8,9 @@ static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 static GLfloat shiness = 30.0f;
 
-Ground::Ground(GLfloat width,GLfloat height)
+Ground::Ground(GLfloat width,GLfloat height,Physics* a_physics)
 {
+	//TODO:回転値もメンバ変数としてrectに持たせる
 	m_Rect = new Rect(width, height);
 
 	//使用するシェーダーの用意
@@ -18,6 +19,16 @@ Ground::Ground(GLfloat width,GLfloat height)
 
 	//マテリアルの設定(どのシェーダーを使うか)
 	m_Rect->MaterialSet(mat);
+
+	Matrix matrix;
+
+	//四隅の点を回転移動させた値(m_posの更新)
+	for (int i = 0; i < 4; i++){
+		matrix.rotateX_RVector(-1.5707963f, m_Rect->GetVertPos(i));
+	}
+	physics = a_physics;
+
+	rigidBodyIndex = physics->CreateRigidBody(m_Rect->GetVertPos(), 4, m_Rect->GetFace(), 6, Vector3(width, 0, height), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
 }
 
 

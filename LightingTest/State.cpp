@@ -20,8 +20,17 @@ static StageData gStageData[] = {
 	{0},
 };
 
+
+Physics* State::GetPhysics(){
+	return m_Physics;
+}
+
 State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID(stageID)
 {
+
+	Common::Delete(m_Physics);
+	m_Physics = new Physics();
+
 	//ステージパラメータの読み込み
 	const StageData& stageData = gStageData[mstageID];
 	//ブロックを作ってセットしていく
@@ -31,7 +40,7 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 	mStaticObjects = new StaticObj*[mStaticObjectNumber];
 
 	//Widthとheightを利用して地面を作る
-	StaticObj* g = new Ground(WIDTH,HEIGHT);
+	StaticObj* g = new Ground(WIDTH,HEIGHT,m_Physics);
 	g->Set(0, 0);
 	mStaticObjects[0] = g;
 	
@@ -48,7 +57,7 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 		}
 	}
 
-	DynamicObj* p = new Player();
+	DynamicObj* p = new Player(m_Physics);
 	//プレイヤーの配置
 
 	//敵の数とプレイヤーの数
@@ -58,7 +67,7 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 	//プレイヤー
 	mDynamicObjects[0] = p;
 	//配置
-	mDynamicObjects[0]->Set(0,2);
+	//mDynamicObjects[0]->Set(0,1.0,0.5);
 
 	//敵
 	for (int i = 0; i < mDynamicObjectNumber; i++){
@@ -67,10 +76,6 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 			//配置
 		}
 	}
-
-	//物理シミュレーションのデータ構成
-
-
 }
 
 State::~State()
@@ -92,6 +97,38 @@ void State::Draw(){
 	}
 }
 
+//物理シミュレーションを動かす
+void State::PhysicsUpdate(){
+	Vector3 force = Vector3(0);
+	Vector3 torque = Vector3(0);
+	if (InputManager::CheckInputMoveUp()){
+		force.setZ(-8.0f);
+		torque.setZ(-8.0f);
+		torque.setY(-5.0f);
+	}
+	if (InputManager::CheckInputMoveDown()){
+		force.setZ(8.0f);
+		torque.setZ(8.0f);
+	}
+	if (InputManager::CheckInputMoveLeft()){
+		force.setX(-8.0f);
+		torque.setX(-8.0f);
+	}
+	if (InputManager::CheckInputMoveRight()){
+		force.setX(8.0f);
+		torque.setX(8.0f);
+	}
+
+	m_Physics->PhysicsUpdate(force,torque);
+
+	for (int i = 0; i < 1; i++){
+	/*	std::cout << mDynamicObjects[i]->States(1).m_position.getX() << std::endl;
+		std::cout << mDynamicObjects[i]->States(1).m_position.getY() << std::endl;
+		std::cout << mDynamicObjects[i]->States(1).m_position.getZ() << std::endl;
+		*/
+	}
+}
+
 //各オブジェクトの更新
 void State::Update(){
 
@@ -103,15 +140,16 @@ void State::Update(){
 		mDynamicObjects[i]->Update();
 	}
 
-	if (mDynamicObjects[0]->Get().x() < -2.5 || mDynamicObjects[0]->Get().x() > 2.5){
+	if (mDynamicObjects[0]->GetPos().x() < -2.5 || mDynamicObjects[0]->GetPos().x() > 2.5){
 		//TODO:本来はゴールオブジェクトに触れたら
 		miss = true;
 	}
 
-	if (mDynamicObjects[0]->Get().z() < -2.5){
+	/*if (mDynamicObjects[0]->GetPos().z() < -2.5){
+		std::cout << mDynamicObjects[0]->GetPos().z() << std::endl;
 		//TODO:本来はゴールオブジェクトに触れたら
 		clear = true;
-	}
+	}*/
 
 }
 

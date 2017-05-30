@@ -38,9 +38,11 @@ Boot* Play::Update(GameSeaquenceController* controller){
 		next = new Pause;
 	}
 
+	//物理シミュレーションの更新
+	state->PhysicsUpdate();
+
 	//オブジェクトの更新
 	state->Update();
-	//物理シミュレーションの更新
 
 	//描画
 	state->Draw();

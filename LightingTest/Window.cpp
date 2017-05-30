@@ -27,7 +27,7 @@ void Window::UpdateScale(){
 Window::Window(){
 }
 
-void Window::CreateWindow(int width, int height, const char *title){
+void Window::CreateWindowStart(int width, int height, const char *title){
 
 	m_window = glfwCreateWindow(width, height, title, NULL, NULL);
 	m_iw = (2.0f / static_cast<GLfloat>(width));

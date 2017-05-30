@@ -280,7 +280,14 @@ Matrix operator/(const Matrix &m) const
 }
 
 //! \brief ’PˆÊs—ñ‚ğŠi”[‚·‚é.
-Matrix &loadIdentity();
+Matrix &loadIdentity(void){
+	array[1] = array[2] = array[3] = array[4] =
+	array[6] = array[7] = array[8] = array[9] =
+	array[11] = array[12] = array[13] = array[14] = 0.0f;
+	array[0] = array[5] = array[10] = array[15] = 1.0f;
+
+	return *this;
+}
 
 //! \brief •½sˆÚ“®‚Ì•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param x x •ûŒü‚ÌˆÚ“®—Ê.
@@ -678,6 +685,21 @@ Matrix rotateZ(GLfloat a) const
 {
 	Matrix m;
 	return multiply(m.loadRotateZ(a));
+}
+
+//x²‚É›“x‰ñ“]‚µ‚½Œã‚ÌÀ•W
+void rotateX_RVector(float a,GLfloat a_vec[3]){
+	Matrix m;
+	m.loadIdentity();
+	m.loadRotateX(a);
+
+	float x1 = a_vec[0];
+	float y1 = a_vec[1];
+	float z1 = a_vec[2];
+
+	a_vec[0] = (x1 * m.array[0]) + (y1 * m.array[4]) + (z1 * m.array[8]);
+	a_vec[1] = (x1 * m.array[1]) + (y1 * m.array[5]) + (z1 * m.array[9]);
+	a_vec[2] = (x1 * m.array[2]) + (y1 * m.array[6]) + (z1 * m.array[10]);
 }
 
 //! \brief (x, y, z) •ûŒü‚ÌƒxƒNƒgƒ‹‚ğ²‚Æ‚·‚é‰ñ“]•ÏŠ·‚ğæ‚¶‚½Œ‹‰Ê‚ğ•Ô‚·.

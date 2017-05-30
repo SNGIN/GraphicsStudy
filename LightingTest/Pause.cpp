@@ -31,7 +31,7 @@ Boot* Pause::Update(GameSeaquenceController* controller){
 	else if (InputManager::CheckInputR()){
 		//ƒŠƒZƒbƒg
 	}
-	controller->DrawState();
+	controller->DrawStateGame();
 
 	return next;
 }

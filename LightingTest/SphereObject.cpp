@@ -75,3 +75,18 @@ void SphereObject::Draw(){
 	//•`‰æ
 	m_Elements->Draw();
 }
+
+GLfloat* SphereObject::GetVertices(){
+	return *pv;
+}
+
+GLfloat SphereObject::GetNumvertices(){
+	return VERTICES;
+}
+
+GLuint* SphereObject::GetFaces(){
+	return *face;
+}
+GLuint SphereObject::GetNumFaces(){
+	return FACES;
+}

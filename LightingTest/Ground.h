@@ -2,6 +2,7 @@
 #include "StaticObj.h"
 #include "ShapeObject.h"
 #include "Rect.h"
+#include "State.h"
 
 class Ground:public StaticObj
 {
@@ -10,7 +11,7 @@ private:
 public:
 	Ground(){}
 	~Ground();
-	Ground(GLfloat width, GLfloat height);
+	Ground(GLfloat width, GLfloat height,Physics* physics);
 
 	StaticObj* Draw();
 	StaticObj* Update();

@@ -34,7 +34,7 @@ Boot* Ready::Update(GameSeaquenceController* controller){
 
 	}
 	//•`‰æ
-	controller->DrawState();
+	controller->DrawStateGame();
 	++mCount;
 	return next;
 }

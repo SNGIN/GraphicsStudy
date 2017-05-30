@@ -2,8 +2,8 @@
 #include "ShapeObject.h"
 
 // 球のデータの分割数
-#define SLICES 64
-#define STACKS 32
+#define SLICES 16
+#define STACKS 8
 
 // 球のデータの頂点数と面数
 #define VERTICES ((SLICES + 1) * (STACKS + 1))
@@ -22,4 +22,8 @@ public:
 	SphereObject(float radius, int slices = SLICES, int stacks = STACKS);
 	~SphereObject();
 	void Draw();
+	GLfloat* GetVertices();
+	GLfloat GetNumvertices();
+	GLuint* GetFaces();
+	GLuint GetNumFaces();
 };
