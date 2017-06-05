@@ -48,6 +48,7 @@ void Physics::BroadPhase(RigidbodyState* states, Collider* colliders, unsigned i
 			Vector3 halfB = absPerElem(orientationB) * (collidableB.m_half + Vector3(AABB_EXPAND));// AABBサイズを若干拡張
 
 			if (IntersectAABB(centerA, halfA, centerB, halfB) && numNewPairs < maxPairs) {
+				//衝突情報を管理するクラスを作成
 				Pair &newPair = newPairs[numNewPairs++];
 
 				newPair.rigidBodyA = i<j ? i : j;

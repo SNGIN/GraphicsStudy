@@ -32,7 +32,7 @@ void MergeTwoBuffers(SortData* d1, unsigned int n1, SortData* d2, unsigned int n
 	}
 }
 
-/// ソート
+/// マージソート
 template <class SortData>
 void Sort(SortData *d, SortData *buff, int n)
 {
