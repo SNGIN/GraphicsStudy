@@ -2,8 +2,8 @@
 #include "ShapeObject.h"
 
 // 球のデータの分割数
-#define SLICES 16
-#define STACKS 8
+#define SLICES 8
+#define STACKS 4
 
 // 球のデータの頂点数と面数
 #define VERTICES ((SLICES + 1) * (STACKS + 1))

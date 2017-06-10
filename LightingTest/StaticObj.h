@@ -29,6 +29,9 @@ public:
 	Collider Collider(int index){
 		return physics->GetCollider(index);
 	}
+	int GetRigidbodyIndex(){
+		return rigidBodyIndex;
+	}
 
 	virtual StaticObj* Draw(){ return 0; };
 	virtual StaticObj* Update(){ return 0; };

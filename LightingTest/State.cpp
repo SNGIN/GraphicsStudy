@@ -5,8 +5,8 @@
 #include "Ground.h"
 
 //マップの広さ
-static const GLfloat WIDTH = 6.0f;
-static const GLfloat HEIGHT = 6.0f;
+static const GLfloat WIDTH = 10.0f;
+static const GLfloat HEIGHT = 10.0f;
 
 //適当なステージデータ(拡張予定)
 struct StageData
@@ -25,6 +25,8 @@ Physics* State::GetPhysics(){
 	return m_Physics;
 }
 
+Ground* g;
+
 State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID(stageID)
 {
 
@@ -40,7 +42,7 @@ State::State(int stageID) :mDynamicObjects(0), mDynamicObjectNumber(0), mstageID
 	mStaticObjects = new StaticObj*[mStaticObjectNumber];
 
 	//Widthとheightを利用して地面を作る
-	StaticObj* g = new Ground(WIDTH,HEIGHT,m_Physics);
+	g = new Ground(WIDTH,HEIGHT,m_Physics);
 	g->Set(0, 0);
 	mStaticObjects[0] = g;
 	
@@ -102,27 +104,39 @@ void State::PhysicsUpdate(){
 	Vector3 force = Vector3(0);
 	Vector3 torque = Vector3(0);
 	if (InputManager::CheckInputMoveUp()){
-		force.setZ(-8.0f);
-		torque.setZ(-8.0f);
-		torque.setY(-5.0f);
+		Matrix3 forwardRotate = Matrix3::rotationX(-0.01f);
+		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), forwardRotate);
+		g->xRotate-=0.01f;
+		//force.setZ(-8.0f);
+		//torque.setZ(-8.0f);
+		//torque.setX(-5.0f);
 	}
 	if (InputManager::CheckInputMoveDown()){
-		force.setZ(8.0f);
-		torque.setZ(8.0f);
+		Matrix3 forwardRotate = Matrix3::rotationX(0.01f);
+		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), forwardRotate);
+		g->xRotate += 0.01f;
+		/*force.setZ(8.0f);
+		torque.setZ(8.0f);*/
 	}
 	if (InputManager::CheckInputMoveLeft()){
-		force.setX(-8.0f);
-		torque.setX(-8.0f);
+		Matrix3 leftrightRotate = Matrix3::rotationZ(0.01f);
+		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), leftrightRotate);
+		g->zRotate -= 0.01f;
+		/*force.setX(-8.0f);
+		torque.setX(-8.0f);*/
 	}
 	if (InputManager::CheckInputMoveRight()){
-		force.setX(8.0f);
-		torque.setX(8.0f);
+		Matrix3 leftrightRotate = Matrix3::rotationZ(-0.01f);
+		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), leftrightRotate);
+		g->zRotate += 0.01f;
+		/*force.setX(8.0f);
+		torque.setX(8.0f);*/
 	}
 
 	m_Physics->PhysicsUpdate(force,torque);
 
 	for (int i = 0; i < 1; i++){
-	/*	std::cout << mDynamicObjects[i]->States(1).m_position.getX() << std::endl;
+		/*std::cout << mDynamicObjects[i]->States(1).m_position.getX() << std::endl;
 		std::cout << mDynamicObjects[i]->States(1).m_position.getY() << std::endl;
 		std::cout << mDynamicObjects[i]->States(1).m_position.getZ() << std::endl;
 		*/
@@ -140,10 +154,12 @@ void State::Update(){
 		mDynamicObjects[i]->Update();
 	}
 
-	if (mDynamicObjects[0]->GetPos().x() < -2.5 || mDynamicObjects[0]->GetPos().x() > 2.5){
+	if (mDynamicObjects[0]->miss){
 		//TODO:本来はゴールオブジェクトに触れたら
 		miss = true;
 	}
+
+	//std::cout << mDynamicObjects[0]->GetPos().y() << std::endl;
 
 	/*if (mDynamicObjects[0]->GetPos().z() < -2.5){
 		std::cout << mDynamicObjects[0]->GetPos().z() << std::endl;

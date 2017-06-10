@@ -95,7 +95,7 @@ void Window::Resize(GLFWwindow* const window, int width, int height){
 	Instance->m_h = height;
 
 	if (Instance != NULL){
-		Instance->mp.loadPerspective(0.5f, (float)width / (float)height, 1.0f, 20.0f);
+		Instance->mp.loadPerspective(0.5f, (float)width / (float)height, 1.0f, 200.0f);
 		//アスペクト比を更新
 		Instance->m_iw = 2.0f / static_cast<GLfloat>(width);
 		Instance->m_ih = 2.0f / static_cast<GLfloat>(height);
@@ -116,5 +116,5 @@ int Window::Get_h(){
 
 Matrix Window::ReturnMV(){
 	//ビューの変換行列(注視点の設定)
-	return Matrix(Lookat(0.0f, 8.0f, 6.3f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+	return Matrix(Lookat(0.0f, 20.0f, 40.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
 }

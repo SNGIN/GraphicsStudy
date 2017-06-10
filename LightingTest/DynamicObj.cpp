@@ -15,7 +15,7 @@ void DynamicObj::Set(GLfloat x, GLfloat y,GLfloat z){
 }
 
 vector3 DynamicObj::GetPos(){
-	return vector3(physics->GetRigidBodyState(rigidBodyIndex).m_position.getX(), 
-		physics->GetRigidBodyState(rigidBodyIndex).m_position.getY(), 
-		physics->GetRigidBodyState(rigidBodyIndex).m_position.getZ());
+	return vector3(States(rigidBodyIndex).m_position.getX(), 
+		States(rigidBodyIndex).m_position.getY(),
+		States(rigidBodyIndex).m_position.getZ());
 }

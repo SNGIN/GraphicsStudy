@@ -71,6 +71,7 @@
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="ConvexConvexContact.cpp" />
     <ClCompile Include="ConvexMesh.cpp" />
+    <ClCompile Include="CubeObject.cpp" />
     <ClCompile Include="DetectCollision.cpp" />
     <ClCompile Include="DynamicObj.cpp" />
     <ClCompile Include="Ending.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Contact.h" />
     <ClInclude Include="ConvexMesh.h" />
     <ClInclude Include="Constraint.h" />
+    <ClInclude Include="CubeObject.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="DynamicObj.h" />
     <ClInclude Include="Ending.h" />

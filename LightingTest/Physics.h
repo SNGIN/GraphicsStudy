@@ -79,6 +79,10 @@ public:
 	const char *PhysicsGetSceneTitle(int i);
 
 	void SetRigidBodyPos(int i, Vector3 pos);
+	void SetRigidBodyRotate(int i, Quat q);
+
+	//オブジェクトの姿勢を変更
+	void PlusRigidBodyOrientation(int i, Matrix3 rotate);
 
 	//剛体情報の取得
 	int GetNumRigidbodies();

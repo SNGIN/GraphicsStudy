@@ -8,33 +8,43 @@ static GLfloat diffColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 static GLfloat specColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 static GLfloat shiness = 30.0f;
 
-Ground::Ground(GLfloat width,GLfloat height,Physics* a_physics)
+Ground::Ground(GLfloat width, GLfloat height, Physics* a_physics)
 {
 	//TODO:回転値もメンバ変数としてrectに持たせる
 	m_Rect = new Rect(width, height);
 
+	m_Cube = new CubeObject(Vector3(width, 0.25f, height));
+
 	//使用するシェーダーの用意
 	Shader* tile = new Shader("Tile.vert", "Tile.frag");
-	Material* mat = new Material(tile,ambColor,diffColor,specColor,&shiness);
+	Material* mat = new Material(tile, ambColor, diffColor, specColor, &shiness);
 
 	//マテリアルの設定(どのシェーダーを使うか)
-	m_Rect->MaterialSet(mat);
+	//m_Rect->MaterialSet(mat);
+	m_Cube->MaterialSet(mat);
 
 	Matrix matrix;
 
 	//四隅の点を回転移動させた値(m_posの更新)
-	for (int i = 0; i < 4; i++){
+	/*for (int i = 0; i < 4;  i++){
 		matrix.rotateX_RVector(-1.5707963f, m_Rect->GetVertPos(i));
-	}
+	}*/
 	physics = a_physics;
 
-	rigidBodyIndex = physics->CreateRigidBody(m_Rect->GetVertPos(), 4, m_Rect->GetFace(), 6, Vector3(width, 0, height), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
+	//rigidBodyIndex = physics->CreateRigidBody(m_Rect->GetVertPos(), 4, m_Rect->GetFace(), 6, Vector3(width, 0, height), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
+	rigidBodyIndex = physics->CreateRigidBody(m_Cube->GetVertices(), m_Cube->GetNumvertices(), m_Cube->GetFaces(), m_Cube->GetNumFaces(), Vector3(width*0.1, 0.25f, height*0.1), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
+	Quat q = Quat::identity();
+	physics->SetRigidBodyRotate(rigidBodyIndex,q);
+
+	//xRotate = -1.5707963f;
+	//yRotate = 0.0f;
+	//zRotate = 0.0f;
 }
 
 
 Ground::~Ground()
 {
-	Common::Delete(m_Rect);
+	Common::Delete(m_Cube);
 }
 
 StaticObj* Ground::Update(){
@@ -45,17 +55,22 @@ StaticObj* Ground::Update(){
 StaticObj* Ground::Draw(){
 	StaticObj* s = this;
 	//シェーダの使用
-	m_Rect->GetMaterial()->m_shader->Use();
+	m_Cube->GetMaterial()->m_shader->Use();
 
 	Matrix mv = Window::ReturnMV()*InputManager::GetTrackBall()->Get();
 
-	//Matrix mv = mv.loadLookat(0.0f, 1.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	//Matrix3 mv = mv.loadLookat(0.0f, 1.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	Matrix mp = Window::getMp();
-	Matrix mw = mv.rotateX(-1.5707963f)*Translate(position.x(), position.y(), position.z());
+	Quat q = physics->GetRigidBodyState(rigidBodyIndex).m_orientation;
+	Matrix mw = mv.rotateQuat(q)*Translate(position.x(), position.y(), position.z());
+	//Matrix mw = mv.rotateQuat(q) *Translate(position.x(), position.y(), position.z());
 
-	m_Rect->GetMaterial()->GetShader()->loadMatrix(mp, mw);
+	//m_Rect->GetMaterial()->GetShader()->loadMatrix(mp, mw);
 	//描画
-	m_Rect->mtriangle->Draw();
+	//m_Rect->Draw();
+
+	m_Cube->GetMaterial()->GetShader()->loadMatrix(mp, mw);
+	//描画
+	m_Cube->Draw();
 	return s;
 }
-

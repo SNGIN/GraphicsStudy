@@ -26,6 +26,8 @@ public:
 		return physics->GetCollider(index);
 	}
 
+	bool miss;
+
 	void Set(GLfloat x, GLfloat y,GLfloat z);
 	virtual DynamicObj* Draw(){ return 0; };
 	virtual DynamicObj* Update(){ return 0; };

@@ -89,6 +89,9 @@ Physics::~Physics()
 {
 }
 
+void Physics::PlusRigidBodyOrientation(int index, Matrix3 rotate){
+	states[index].m_orientation *= Quat(rotate);
+}
 
 //シミュレーション系
 void Physics::PhysicsUpdate(Vector3 Force,Vector3 Torque){
@@ -121,6 +124,10 @@ void Physics::PhysicsRelease(){
 
 void Physics::SetRigidBodyPos(int i, Vector3 pos){
 	states[i].m_position = pos;
+}
+
+void Physics::SetRigidBodyRotate(int i, Quat q){
+	states[i].m_orientation = q;
 }
 
 const Collider Physics::GetCollider(int i){

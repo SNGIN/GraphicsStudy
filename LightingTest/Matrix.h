@@ -7,6 +7,12 @@
 #include "glew.h"
 #include "glfw3.h"
 #include <math.h>
+#include "vectormath_aos.h"
+#include "quat_aos.h"
+
+typedef Vectormath::Aos::Quat       Quat;
+typedef Vectormath::Aos::Vector3    Vector3;
+typedef Vectormath::Aos::Vector4    Vector4;
 
 class Matrix
 {
@@ -342,6 +348,64 @@ Matrix &loadRotateX(GLfloat a){
 	array[4] = 0.0f; array[5] = c;    array[6] = s;    array[7] = 0.0f;
 	array[8] = 0.0f; array[9] = -s;   array[10] = c;    array[11] = 0.0f;
 	array[12] = 0.0f; array[13] = 0.0f; array[14] = 0.0f; array[15] = 1.0f;
+
+	return *this;
+}
+
+Matrix &loadRotateQuat(Quat unitQuat){
+	float qx, qy, qz, qw, qx2, qy2, qz2, qxqx2, qyqy2, qzqz2, qxqy2, qyqz2, qzqw2, qxqz2, qyqw2, qxqw2;
+
+	qx = unitQuat.getX();
+	qy = unitQuat.getY();
+	qz = unitQuat.getZ();
+	qw = unitQuat.getW();
+
+	qx2 = (qx + qx);
+	qy2 = (qy + qy);
+	qz2 = (qz + qz);
+	qxqx2 = (qx * qx2);
+	qxqy2 = (qx * qy2);
+	qxqz2 = (qx * qz2);
+	qxqw2 = (qw * qx2);
+	qyqy2 = (qy * qy2);
+	qyqz2 = (qy * qz2);
+	qyqw2 = (qw * qy2);
+	qzqz2 = (qz * qz2);
+	qzqw2 = (qw * qz2);
+
+	array[0] = (1.0f - qyqy2) - qzqz2;	array[4] = qxqy2 - qzqw2;			array[8] = qxqz2 + qyqw2;			array[12] = 0;
+	array[1] = qxqy2 + qzqw2;			array[5] = (1.0f - qxqx2) - qzqz2;	array[9] = qyqz2 - qxqw2;			array[13] = 0;
+	array[2] = qxqz2 - qyqw2;			array[6] = qyqz2 + qxqw2;			array[10] = (1.0f - qxqx2) - qyqy2;	array[14] = 0;
+	array[3] = 0;						array[7] = 0;						array[11] = 0;						array[15] = 1;
+
+	return *this;
+}
+
+Matrix &loadmodelTranslate(Quat unitQuat,Vector3 vec){
+	float qx, qy, qz, qw, qx2, qy2, qz2, qxqx2, qyqy2, qzqz2, qxqy2, qyqz2, qzqw2, qxqz2, qyqw2, qxqw2;
+
+	qx = unitQuat.getX();
+	qy = unitQuat.getY();
+	qz = unitQuat.getZ();
+	qw = unitQuat.getW();
+
+	qx2 = (qx + qx);
+	qy2 = (qy + qy);
+	qz2 = (qz + qz);
+	qxqx2 = (qx * qx2);
+	qxqy2 = (qx * qy2);
+	qxqz2 = (qx * qz2);
+	qxqw2 = (qw * qx2);
+	qyqy2 = (qy * qy2);
+	qyqz2 = (qy * qz2);
+	qyqw2 = (qw * qy2);
+	qzqz2 = (qz * qz2);
+	qzqw2 = (qw * qz2);
+
+	array[0] = (1.0f - qyqy2) - qzqz2;	array[4] = qxqy2 - qzqw2;			array[8] = qxqz2 + qyqw2;			array[12] = vec.getX();
+	array[1] = qxqy2 + qzqw2;			array[5] = (1.0f - qxqx2) - qzqz2;	array[9] = qyqz2 - qxqw2;			array[13] = vec.getY();
+	array[2] = qxqz2 - qyqw2;			array[6] = qyqz2 + qxqw2;			array[10] = (1.0f - qxqx2) - qyqy2;	array[14] = vec.getZ();
+	array[3] = 0;						array[7] = 0;						array[11] = 0;						array[15] = 1;
 
 	return *this;
 }
@@ -687,6 +751,19 @@ Matrix rotateZ(GLfloat a) const
 	return multiply(m.loadRotateZ(a));
 }
 
+//! \brief quatで回転変換を乗じた結果を返す.
+Matrix rotateQuat(Quat q) const
+{
+	Matrix m;
+	return multiply(m.loadRotateQuat(q));
+}
+
+Matrix modelTranslate(Quat q,Vector3 v) const
+{
+	Matrix m;
+	return multiply(m.loadmodelTranslate(q,v));
+}
+
 //x軸に○度回転した後の座標
 void rotateX_RVector(float a,GLfloat a_vec[3]){
 	Matrix m;
@@ -927,6 +1004,12 @@ inline Matrix RotateZ(GLfloat a)
 {
 	Matrix m;
 	return m.loadRotateZ(a);
+}
+
+inline Matrix RotateQuat(Quat q)
+{
+	Matrix m;
+	return m.loadRotateQuat(q);
 }
 
 //! \brief (x, y, z) 方向のベクトルを軸とする回転の変換行列を乗じた結果を返す.
