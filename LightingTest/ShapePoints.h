@@ -14,6 +14,7 @@ public:
 	//! \brief デストラクタ.
 	virtual ~Shape()
 	{
+		//描画に使った頂点配列の解除と削除
 		glBindVertexArray(0);
 		glDeleteVertexArrays(1, &vao);
 	}

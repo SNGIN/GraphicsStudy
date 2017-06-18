@@ -116,5 +116,5 @@ int Window::Get_h(){
 
 Matrix Window::ReturnMV(){
 	//ビューの変換行列(注視点の設定)
-	return Matrix(Lookat(0.0f, 20.0f, 40.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+	return Matrix(Lookat(0.0f, 35.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
 }

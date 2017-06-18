@@ -11,19 +11,8 @@
 
 class SphereObject:public ShapeObject
 {
-private:
-	GLfloat pv[VERTICES][3];
-	GLfloat nv[VERTICES][3];
-	GLfloat tv[VERTICES][2];
-	GLuint face[FACES][3];
-
 public:
 	SphereObject();
-	SphereObject(float radius, int slices = SLICES, int stacks = STACKS);
+	SphereObject(Vector3 radius, int slices = SLICES, int stacks = STACKS);
 	~SphereObject();
-	void Draw();
-	GLfloat* GetVertices();
-	GLfloat GetNumvertices();
-	GLuint* GetFaces();
-	GLuint GetNumFaces();
 };

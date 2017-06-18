@@ -24,8 +24,7 @@ GameSeaquenceController::~GameSeaquenceController()
 	Common::Delete(mGameSeaquence);
 }
 
-//各ゲームのシーケンスUpdateを動かして、シーケンスを取得、取得したシーケンスが次のシーケンスなら
-//遷移処理
+//各ゲームのシーケンスUpdateを動かして、シーケンスを取得、取得したシーケンスが次のシーケンスなら遷移処理
 Boot* GameSeaquenceController::Update(GrandController*){
 	Boot* next = this;
 	Boot* nextGameSeaquence = mGameSeaquence->Update(this);
@@ -60,6 +59,7 @@ void GameSeaquenceController::DrawStateGame()const{
 void GameSeaquenceController::StartLoading(){
 	//TODO:読み込みが重いのでリセットとかにするといい
 	Common::Delete(mState);
+	//ゲーム情報管理クラスを作る
 	mState = new State(mStageID);
 }
 

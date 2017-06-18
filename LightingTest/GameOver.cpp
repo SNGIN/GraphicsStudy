@@ -19,8 +19,6 @@ Boot* GameOver::Update(SeaquenceController*){
 	if (mCount == 60){
 		next = new Title;
 	}
-	//•`‰æ
-
 	++mCount;
 	return next;
 }

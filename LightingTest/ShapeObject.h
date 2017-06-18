@@ -3,18 +3,28 @@
 #include "Material.h"
 #include "PhysicsInclude.h"
 
-class ShapeObject:public ShapeElements
+//描画系のオブジェクトの基底クラス
+class ShapeObject
 {
 protected:
-	//描画に使用する情報(頂点とか頂点インデックスとか)
+	//描画に使用する情報
 	ShapeElements* m_Elements;
 	//マテリアル
 	Material* m_Material;
 
-	//メッシュ情報(TODO:コンストラクタでメッシュデータの登録)
+	GLfloat* vertPosition;
+	GLfloat* verticesNormal;
+	GLfloat* vertTex;
+	GLuint* face;
+
+	GLuint numVert;
+	GLuint numFaces;
+
+	Vector3 scale;
 
 public:
-	ShapeObject();
+	ShapeObject(){};
+	ShapeObject(GLuint VertNum, GLuint FaceNum,Vector3 Scale);
 	~ShapeObject();
 
 	void MaterialSet(Material* mat);
@@ -24,5 +34,11 @@ public:
 		return m_Material;
 	}
 
+	void Draw();
+	GLfloat* GetVertices();
+	GLfloat GetNumvertices();
+	GLuint* GetFaces();
+	GLuint GetNumFaces();
+	Vector3 GetScale();
 };
 

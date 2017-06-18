@@ -23,9 +23,7 @@ Player::Player(Physics* mPhysics)
 	//モデル読み込み(重いので最初に読み込む)
 	//m_bunny = new Model("bunny.obj");
 	//TODO:faceをelements形式で
-	m_sphere = new SphereObject(1.0f);
-
-	Vector3 radius = Vector3(1.0f, 1.0f, 1.0f);
+	m_sphere = new SphereObject(Vector3(1.0f));
 
 	//使用するシェーダーの用意
 	Shader* simple = new Shader("lambert.vert", "lambert.frag");
@@ -39,8 +37,7 @@ Player::Player(Physics* mPhysics)
 
 	//物理シミュレーションに渡して剛体データを作成(TODO:sphereobjectに物理的データを持たせる)
 	rigidBodyIndex = mPhysics->CreateRigidBody(m_sphere->GetVertices(), m_sphere->GetNumvertices(), m_sphere->GetFaces(), m_sphere->GetNumFaces(),
-	//rigidBodyIndex = mPhysics->CreateRigidBody(sphere_vertices,sphere_numVertices, sphere_indices, sphere_numIndices,
-	radius,MotionType::TypeActive,Vector3(0),1.0,true);
+	m_sphere->GetScale() ,MotionType::TypeActive,Vector3(0),1.0,true);
 	Set(0, 3.0, 0.5);
 	position.set(States(rigidBodyIndex).m_position.getX(), States(rigidBodyIndex).m_position.getY(), States(rigidBodyIndex).m_position.getZ());
 	miss = false;
@@ -54,24 +51,10 @@ Player::~Player()
 }
 
 DynamicObj* Player::Update(){
-	//外力を与える
-	/*if (InputManager::CheckInputMoveUp()){
-		position.setz(position.z()- speed);
-	}
-	if (InputManager::CheckInputMoveDown()){
-		position.setz(position.z() + speed);
-	}
-	if (InputManager::CheckInputMoveLeft()){
-		position.setx(position.x() - speed);
-	}
-	if (InputManager::CheckInputMoveRight()){
-		position.setx(position.x() + speed);
-	}*/
 	position.set(States(rigidBodyIndex).m_position.getX(), States(rigidBodyIndex).m_position.getY(), States(rigidBodyIndex).m_position.getZ());
 	if (States(rigidBodyIndex).m_position.getY() < -20){
 		miss = true;
 	}
-	//std::cout << States(rigidBodyIndex).m_position.getY() << std::endl;
 	return this;
 }
 

@@ -3,7 +3,7 @@
 #include "Commonheader.h"
 #include "BufferBase.h"
 
-//メモリに格納されるバッファオブジェクトのテンプレ
+//メモリに格納されるバッファオブジェクトのテンプレ-トクラス
 template <typename T>
 class Buffer:public BufferBase
 {
@@ -56,6 +56,7 @@ public:
 		glBufferSubData(target, offset * sizeof (T), number * sizeof (T), data);
 	}
 
+	//バッファオブジェクトの結びつけ(インデックスバッファ、頂点バッファ)
 	void Load(GLenum target, GLuint number, const T *data, GLenum usage = GL_STATIC_DRAW){
 		this->target = target;
 		this->number = number;

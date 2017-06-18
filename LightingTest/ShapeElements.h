@@ -4,6 +4,7 @@
 //Elements
 class ShapeElements:public ShapeTriangle
 {
+	//インデックスバッファ
 	Buffer<GLuint[3]> index;
 
 public:

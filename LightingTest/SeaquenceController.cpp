@@ -17,7 +17,7 @@ SeaquenceController::~SeaquenceController()
 }
 
 void SeaquenceController::Create(){
-	//実体を作る
+	//自身の実体を作る
 	mInstance = new SeaquenceController();
 }
 
@@ -31,15 +31,18 @@ SeaquenceController* SeaquenceController::instance(){
 }
 
 void SeaquenceController::Update(){
-	//派生クラスのUpdateを実行する
+	//シーケンスクラスはBootを基底クラスに持つ
+	//シーケンスクラスのupdate関数は自身のポインタをかえす
+	//派生クラスのUpdateを実行する(どのUpdateを実行するかはポインタ変換による自動判定)
 	Boot* nextSeaquence = mSeaquence->Update(this);
 	if (nextSeaquence != mSeaquence){
-		//遷移判定
 		Seaquence* casted = dynamic_cast<Seaquence*>(nextSeaquence);
+		
 		//現在のシーケンスを捨てて次へ
 		Common::Delete(mSeaquence);
 		mSeaquence = casted;
 	}
+	//毎回判定するので0に戻しておく
 	nextSeaquence = 0;
 }
 

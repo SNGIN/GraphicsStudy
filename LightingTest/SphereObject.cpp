@@ -13,7 +13,12 @@ SphereObject::SphereObject()
 {
 }
 
-SphereObject::SphereObject(float radius, int slices, int stacks){
+SphereObject::SphereObject(Vector3 radius, int slices, int stacks) :ShapeObject(sphere_numVertices, sphere_numIndices,radius){
+
+	GLfloat p[sphere_numVertices][3];
+	GLfloat n[sphere_numVertices][3];
+	GLfloat t[sphere_numVertices][2];
+	GLuint f[sphere_numIndices][3];
 
 	// 頂点の位置とテクスチャ座標を求める
 	/*for (int k = 0, j = 0; j <= stacks; ++j)
@@ -71,42 +76,45 @@ SphereObject::SphereObject(float radius, int slices, int stacks){
 	}*/
 
 	for (GLuint i = 0; i<sphere_numVertices; i++) {
-		pv[i][0] = sphere_vertices[i * 3] * radius;
-		pv[i][1] = sphere_vertices[i * 3 + 1] * radius;
-		pv[i][2] = sphere_vertices[i * 3 + 2] * radius;
+		p[i][0] = sphere_vertices[i * 3] * radius.getX();
+		p[i][1] = sphere_vertices[i * 3 + 1] * radius.getY();
+		p[i][2] = sphere_vertices[i * 3 + 2] * radius.getZ();
+
+		n[i][0] = sphere_vertices[i * 3];
+		n[i][1] = sphere_vertices[i * 3 + 1];
+		n[i][2] = sphere_vertices[i * 3 + 2];
+	}
+
+	for (GLuint i = 0; i<sphere_numVertices*3; i++){
+		switch (i % 3)
+		{
+		case 0:
+			vertPosition[i] = sphere_vertices[i] * radius.getX();
+			break;
+		case 1:
+			vertPosition[i] = sphere_vertices[i] * radius.getY();
+			break;
+		case 2:
+			vertPosition[i] = sphere_vertices[i] * radius.getZ();
+			break;
+		}
+		verticesNormal[i] = sphere_vertices[i];
 	}
 
 	for (GLuint i = 0; i<sphere_numIndices; i++) {
-		face[i][0] = sphere_indices[i * 3];
-		face[i][1] = sphere_indices[i * 3 + 1];
-		face[i][2] = sphere_indices[i * 3 + 2];
+		f[i][0] = sphere_indices[i * 3];
+		f[i][1] = sphere_indices[i * 3 + 1];
+		f[i][2] = sphere_indices[i * 3 + 2];
 	}
 
-	m_Elements = new ShapeElements(sphere_numVertices, pv, pv, sphere_numIndices, face, GL_TRIANGLES);
+	for (GLuint i = 0; i<sphere_numIndices*3; i++){
+		face[i] = sphere_indices[i];
+	}
 
+	m_Elements = new ShapeElements(sphere_numVertices, p, n, sphere_numIndices, f, GL_TRIANGLES);
 }
 
 
 SphereObject::~SphereObject()
 {
-}
-
-void SphereObject::Draw(){
-	//描画
-	m_Elements->Draw();
-}
-
-GLfloat* SphereObject::GetVertices(){
-	return *pv;
-}
-
-GLfloat SphereObject::GetNumvertices(){
-	return VERTICES;
-}
-
-GLuint* SphereObject::GetFaces(){
-	return *face;
-}
-GLuint SphereObject::GetNumFaces(){
-	return FACES;
 }

@@ -11,7 +11,7 @@ static GLfloat shiness = 30.0f;
 Ground::Ground(GLfloat width, GLfloat height, Physics* a_physics)
 {
 	//TODO:‰ñ“]’l‚àƒƒ“ƒo•Ï”‚Æ‚µ‚Ärect‚ÉŽ‚½‚¹‚é
-	m_Rect = new Rect(width, height);
+	//m_Rect = new Rect(width, height);
 
 	m_Cube = new CubeObject(Vector3(width, 0.25f, height));
 
@@ -32,13 +32,9 @@ Ground::Ground(GLfloat width, GLfloat height, Physics* a_physics)
 	physics = a_physics;
 
 	//rigidBodyIndex = physics->CreateRigidBody(m_Rect->GetVertPos(), 4, m_Rect->GetFace(), 6, Vector3(width, 0, height), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
-	rigidBodyIndex = physics->CreateRigidBody(m_Cube->GetVertices(), m_Cube->GetNumvertices(), m_Cube->GetFaces(), m_Cube->GetNumFaces(), Vector3(width*0.1, 0.25f, height*0.1), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
+	rigidBodyIndex = physics->CreateRigidBody(m_Cube->GetVertices(), m_Cube->GetNumvertices(), m_Cube->GetFaces(), m_Cube->GetNumFaces(), Vector3(width, 0.25f, height), MotionType::TypeStatic, Vector3(position.x(), position.y(), position.z()), 1.0, false);
 	Quat q = Quat::identity();
 	physics->SetRigidBodyRotate(rigidBodyIndex,q);
-
-	//xRotate = -1.5707963f;
-	//yRotate = 0.0f;
-	//zRotate = 0.0f;
 }
 
 

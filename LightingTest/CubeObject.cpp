@@ -1,49 +1,61 @@
 #include "CubeObject.h"
 
+// サイズ1x1x1のボックス
+const int box_numVertices = 8;
+const int box_numIndices = 36;
+const float box_vertices[] = {
+	-1.000000, -1.000000, 1.000000, 1.000000, -1.000000, 1.000000, -1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000, -1.000000, 1.000000, -1.000000, 1.000000, 1.000000, -1.000000, -1.000000, -1.000000, -1.000000, 1.000000, -1.000000, -1.000000
+};
+const unsigned short box_indices[] = {
+	0, 1, 2, 2, 1, 3, 2, 3, 4, 4, 3, 5, 4, 5, 6, 6, 5, 7, 6, 7, 0, 0, 7, 1, 1, 7, 3, 3, 7, 5, 6, 0, 4, 4, 0, 2
+};
 
 CubeObject::CubeObject()
 {
 }
 
-CubeObject::CubeObject(Vector3 scale){
+CubeObject::CubeObject(Vector3 Cubescale) :ShapeObject(box_numVertices, box_numIndices, Cubescale){
+
+	GLfloat p[box_numVertices][3];
+	GLfloat n[box_numVertices][3];
+	GLfloat t[box_numVertices][2];
+	GLuint f[box_numIndices][3];
 
 	for (GLuint i = 0; i<box_numVertices; i++) {
-		pv[i][0] = box_vertices[i * 3] * scale.getX();
-		pv[i][1] = box_vertices[i * 3 + 1] * scale.getY();
-		pv[i][2] = box_vertices[i * 3 + 2] * scale.getZ();
+		p[i][0] = box_vertices[i * 3] * Cubescale.getX();
+		p[i][1] = box_vertices[i * 3 + 1] * Cubescale.getY();
+		p[i][2] = box_vertices[i * 3 + 2] * Cubescale.getZ();
+
+		n[i][0] = box_vertices[i * 3];
+		n[i][1] = box_vertices[i * 3 + 1];
+		n[i][2] = box_vertices[i * 3 + 2];
+	}
+
+	for (GLuint i = 0; i<box_numVertices*3; i++){
+		switch (i % 3)
+		{
+		case 0:
+			vertPosition[i] = box_vertices[i] * Cubescale.getX();
+			break;
+		case 1:
+			vertPosition[i] = box_vertices[i] * Cubescale.getY();
+			break;
+		case 2:
+			vertPosition[i] = box_vertices[i] * Cubescale.getZ();
+			break;
+		}
+		verticesNormal[i] = box_vertices[i];
 	}
 
 	for (GLuint i = 0; i<box_numIndices; i++) {
-		face[i][0] = box_indices[i * 3];
-		face[i][1] = box_indices[i * 3 + 1];
-		face[i][2] = box_indices[i * 3 + 2];
+		f[i][0] = box_indices[i * 3];
+		f[i][1] = box_indices[i * 3 + 1];
+		f[i][2] = box_indices[i * 3 + 2];
 	}
 
-	m_Elements = new ShapeElements(box_numVertices, pv, pv, box_numIndices, face, GL_TRIANGLES);
+	for (GLuint i = 0; i<box_numIndices*3; i++){
+		face[i] = box_indices[i];
+	}
 
-}
-
-
-CubeObject::~CubeObject()
-{
-}
-
-void CubeObject::Draw(){
-	//描画
-	m_Elements->Draw();
-}
-
-GLfloat* CubeObject::GetVertices(){
-	return *pv;
-}
-
-GLfloat CubeObject::GetNumvertices(){
-	return box_numVertices;
-}
-
-GLuint* CubeObject::GetFaces(){
-	return *face;
-}
-GLuint CubeObject::GetNumFaces(){
-	return box_numIndices;
+	m_Elements = new ShapeElements(box_numVertices, p, n, box_numIndices, f, GL_TRIANGLES);
 }

@@ -104,43 +104,36 @@ void State::PhysicsUpdate(){
 	Vector3 force = Vector3(0);
 	Vector3 torque = Vector3(0);
 	if (InputManager::CheckInputMoveUp()){
-		Matrix3 forwardRotate = Matrix3::rotationX(-0.01f);
+		/*Matrix3 forwardRotate = Matrix3::rotationX(-0.01f);
 		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), forwardRotate);
-		g->xRotate-=0.01f;
-		//force.setZ(-8.0f);
+		g->xRotate-=0.01f;*/
+		force.setZ(-5.0f);
 		//torque.setZ(-8.0f);
-		//torque.setX(-5.0f);
+		torque.setX(-2.0f);
 	}
 	if (InputManager::CheckInputMoveDown()){
-		Matrix3 forwardRotate = Matrix3::rotationX(0.01f);
+		/*Matrix3 forwardRotate = Matrix3::rotationX(0.01f);
 		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), forwardRotate);
-		g->xRotate += 0.01f;
-		/*force.setZ(8.0f);
-		torque.setZ(8.0f);*/
+		g->xRotate += 0.01f;*/
+		force.setZ(5.0f);
+		torque.setZ(2.0f);
 	}
 	if (InputManager::CheckInputMoveLeft()){
-		Matrix3 leftrightRotate = Matrix3::rotationZ(0.01f);
+		/*Matrix3 leftrightRotate = Matrix3::rotationZ(0.01f);
 		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), leftrightRotate);
-		g->zRotate -= 0.01f;
-		/*force.setX(-8.0f);
-		torque.setX(-8.0f);*/
+		g->zRotate -= 0.01f;*/
+		force.setX(-5.0f);
+		torque.setX(-2.0f);
 	}
 	if (InputManager::CheckInputMoveRight()){
-		Matrix3 leftrightRotate = Matrix3::rotationZ(-0.01f);
+		/*Matrix3 leftrightRotate = Matrix3::rotationZ(-0.01f);
 		m_Physics->PlusRigidBodyOrientation(g->GetRigidbodyIndex(), leftrightRotate);
-		g->zRotate += 0.01f;
-		/*force.setX(8.0f);
-		torque.setX(8.0f);*/
+		g->zRotate += 0.01f;*/
+		force.setX(5.0f);
+		torque.setX(2.0f);
 	}
 
 	m_Physics->PhysicsUpdate(force,torque);
-
-	for (int i = 0; i < 1; i++){
-		/*std::cout << mDynamicObjects[i]->States(1).m_position.getX() << std::endl;
-		std::cout << mDynamicObjects[i]->States(1).m_position.getY() << std::endl;
-		std::cout << mDynamicObjects[i]->States(1).m_position.getZ() << std::endl;
-		*/
-	}
 }
 
 //各オブジェクトの更新

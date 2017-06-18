@@ -37,9 +37,6 @@
     <Filter Include="ソース ファイル\Game\Seaquence">
       <UniqueIdentifier>{95831ee3-f64c-41ae-84d1-6928619fa13f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Game\GameSeaquence">
-      <UniqueIdentifier>{a25fdfa3-34e6-4b85-98e2-1d108d58c9a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\Game\Object">
       <UniqueIdentifier>{e214cf75-1c76-4c3c-b208-2bbe78601878}</UniqueIdentifier>
     </Filter>
@@ -58,26 +55,59 @@
     <Filter Include="ヘッダー ファイル\Graphic\Material">
       <UniqueIdentifier>{4e8644ae-1f24-4bcd-87ee-d35ff1f86f1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Common\Controller">
-      <UniqueIdentifier>{6c994f44-968c-40df-8c72-0effc27463ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Physics">
       <UniqueIdentifier>{0d54965f-4f73-4088-b661-a9fab50b6028}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Common\Controller">
-      <UniqueIdentifier>{bd1f6420-56b9-4bd9-bf31-49c4071f6a85}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Physics">
       <UniqueIdentifier>{41716cc5-538a-49eb-a017-c80b50312a28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Game\GameControl">
+      <UniqueIdentifier>{a6c05ed6-5337-4b20-8dfc-44c3a9812679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Common\Input">
+      <UniqueIdentifier>{6c994f44-968c-40df-8c72-0effc27463ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Common\Input">
+      <UniqueIdentifier>{bd1f6420-56b9-4bd9-bf31-49c4071f6a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\GameController">
+      <UniqueIdentifier>{d3124823-2643-4527-b96c-aaf17e0f0000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Graphic\Object">
+      <UniqueIdentifier>{28fa23eb-6d29-4606-bdf2-6c7c43d698b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Graphic\Texture">
+      <UniqueIdentifier>{fb1d1833-911a-40f8-8da9-ba77ed8a8e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Graphic\Shader">
+      <UniqueIdentifier>{8ead2c4f-3ebf-4e6a-a69b-b59cba09df2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Common\Math">
+      <UniqueIdentifier>{dafa9688-ee9a-43f2-93be-d931a5e95415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Object">
+      <UniqueIdentifier>{adad5f6a-ba6e-449b-9db2-df220fefa06a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Shader">
+      <UniqueIdentifier>{46547387-d0f6-4fef-8c30-e44adc68b6a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Texture">
+      <UniqueIdentifier>{6b9d183e-7d00-49f2-bfec-ee97963e3f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Base">
+      <UniqueIdentifier>{2d196f34-e3f0-43ee-9def-dc9fa67536d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Graphic\Light">
+      <UniqueIdentifier>{66bea311-7f95-46b9-bc2d-72bb6277e713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Physics\PhysicBase">
+      <UniqueIdentifier>{63c3c69a-67a8-40e7-ab0a-b887a42a4d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Seaquence\GameSeaquence">
+      <UniqueIdentifier>{a25fdfa3-34e6-4b85-98e2-1d108d58c9a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル\Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>ソース ファイル\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>ソース ファイル\Game\Seaquence</Filter>
     </ClCompile>
@@ -85,10 +115,10 @@
       <Filter>ソース ファイル\Game\Seaquence</Filter>
     </ClCompile>
     <ClCompile Include="GameSeaquence.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Clear.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="SeaquenceController.cpp">
       <Filter>ソース ファイル\Game\Seaquence</Filter>
@@ -103,10 +133,10 @@
       <Filter>ソース ファイル\Game\Obj</Filter>
     </ClCompile>
     <ClCompile Include="Play.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Ready.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Ending.cpp">
       <Filter>ソース ファイル\Game\Seaquence</Filter>
@@ -114,14 +144,11 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>ソース ファイル\Game\Seaquence</Filter>
     </ClCompile>
-    <ClCompile Include="GameSeaquenceController.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
-    </ClCompile>
     <ClCompile Include="Failure.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Pause.cpp">
-      <Filter>ソース ファイル\Game\GameSeaquence</Filter>
+      <Filter>ソース ファイル\Game\Seaquence\GameSeaquence</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>ソース ファイル\Common</Filter>
@@ -129,34 +156,16 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>ソース ファイル\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>ソース ファイル\Graphic\Material</Filter>
     </ClCompile>
     <ClCompile Include="SimpleImageMaterial.cpp">
       <Filter>ソース ファイル\Graphic\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Rect.cpp">
-      <Filter>ソース ファイル\Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackBall.cpp">
-      <Filter>ソース ファイル\Common\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>ソース ファイル\Common\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>ソース ファイル\Game\Seaquence</Filter>
-    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>ソース ファイル\Game\Obj</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Game\Obj</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereObject.cpp">
       <Filter>ソース ファイル\Game\Obj</Filter>
     </ClCompile>
     <ClCompile Include="ShapeObject.cpp">
@@ -189,41 +198,38 @@
     <ClCompile Include="Solver.cpp">
       <Filter>ソース ファイル\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="GameSeaquenceController.cpp">
+      <Filter>ソース ファイル\Game\GameControl</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>ソース ファイル\Common\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackBall.cpp">
+      <Filter>ソース ファイル\Common\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>ソース ファイル\Game\GameControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>ソース ファイル\Graphic\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>ソース ファイル\Graphic\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereObject.cpp">
+      <Filter>ソース ファイル\Graphic\Object</Filter>
+    </ClCompile>
     <ClCompile Include="CubeObject.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Graphic\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>ソース ファイル\Graphic\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>ソース ファイル\Graphic\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferBase.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="RefCounter.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeElements.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapePoints.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeTriangle.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Boot.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
     </ClInclude>
@@ -242,16 +248,10 @@
     <ClInclude Include="GoalObj.h">
       <Filter>ヘッダー ファイル\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
-    </ClInclude>
     <ClInclude Include="SeaquenceController.h">
       <Filter>ヘッダー ファイル\Game\Seaquence</Filter>
     </ClInclude>
     <ClInclude Include="Play.h">
-      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSeaquenceController.h">
       <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
     </ClInclude>
     <ClInclude Include="Ready.h">
@@ -278,14 +278,8 @@
     <ClInclude Include="Commonheader.h">
       <Filter>ヘッダー ファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="SimpleImageMaterial.h">
       <Filter>ヘッダー ファイル\Graphic\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>ヘッダー ファイル\Graphic\Material</Filter>
@@ -293,29 +287,11 @@
     <ClInclude Include="Ground.h">
       <Filter>ヘッダー ファイル\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>ヘッダー ファイル\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
     <ClInclude Include="SphereObject.h">
       <Filter>ヘッダー ファイル\Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeObject.h">
-      <Filter>ヘッダー ファイル\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackBall.h">
-      <Filter>ヘッダー ファイル\Common\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>ヘッダー ファイル\Common\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsMathBase.h">
-      <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
     <ClInclude Include="ConvexMesh.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
@@ -326,16 +302,10 @@
     <ClInclude Include="PhysicsShape.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsState.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
     <ClInclude Include="RigidBodyElements.h">
-      <Filter>ヘッダー ファイル\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsInclude.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Pair.h">
@@ -347,14 +317,8 @@
     <ClInclude Include="Constraint.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Allocator.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultAllocator.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Sort.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="BallJoint.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
@@ -362,11 +326,83 @@
     <ClInclude Include="Solverbody.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="VectorFunction.h">
+    <ClInclude Include="Boot.h">
+      <Filter>ヘッダー ファイル\Game\GameSeaquence</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackBall.h">
+      <Filter>ヘッダー ファイル\Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>ヘッダー ファイル\Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSeaquenceController.h">
+      <Filter>ヘッダー ファイル\Game\GameController</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>ヘッダー ファイル\Game\GameController</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>ヘッダー ファイル\Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
       <Filter>ヘッダー ファイル\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>ヘッダー ファイル\Graphic\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferBase.h">
+      <Filter>ヘッダー ファイル\Graphic\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>ヘッダー ファイル\Graphic\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>ヘッダー ファイル\Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
     <ClInclude Include="CubeObject.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RefCounter.h">
+      <Filter>ヘッダー ファイル\Graphic\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>ヘッダー ファイル\Graphic\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeTriangle.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeElements.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePoints.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>ヘッダー ファイル\Graphic\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsInclude.h">
+      <Filter>ヘッダー ファイル\Physics\PhysicBase</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsMathBase.h">
+      <Filter>ヘッダー ファイル\Physics\PhysicBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Allocator.h">
+      <Filter>ヘッダー ファイル\Physics\PhysicBase</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorFunction.h">
+      <Filter>ヘッダー ファイル\Physics\PhysicBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>ヘッダー ファイル\Physics\PhysicBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeObject.h">
+      <Filter>ヘッダー ファイル\Graphic\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
