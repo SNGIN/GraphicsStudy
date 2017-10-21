@@ -7,7 +7,8 @@
 Title::Title()
 {
 	//ウィンドウサイズのRectオブジェクト用意
-	mrect = new Rect(1, 1);
+	GLfloat aspect = (GLfloat)Window::Get_h() / (GLfloat)Window::Get_w();
+	mrect = new Rect(15.0f, 15.0f*aspect, Vector3(0.0f, 0.0f, 20.0f), true);
 	//シェーダー使用定義
 	Shader* titleShader = new Shader("simpleTex.vert","simpleTex.frag");
 

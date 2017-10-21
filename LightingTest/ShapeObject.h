@@ -32,6 +32,7 @@ public:
 	Material* GetMaterial(){
 		//std::cout << m_Material << std::endl;
 		return m_Material;
+
 	}
 
 	void Draw();

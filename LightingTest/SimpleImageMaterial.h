@@ -15,5 +15,10 @@ public:
 
 	void UseTexture();
 	void SetTexLoc();
+	void OffTexture();
+
+	Texture* GetTex(){
+		return mtex;
+	}
 };
 

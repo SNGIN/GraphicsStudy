@@ -14,8 +14,12 @@ CubeObject::CubeObject()
 {
 }
 
-CubeObject::CubeObject(Vector3 Cubescale) :ShapeObject(box_numVertices, box_numIndices, Cubescale){
+CubeObject::CubeObject(Vector3 Cubescale,
+	char* vert, char* flag, 
+	GLfloat* ambColor, GLfloat* diffColor, GLfloat *specColor, GLfloat shiness
+	) :ShapeObject(box_numVertices, box_numIndices, Cubescale){
 
+	//頂点位置とインデックスの設定=============================================
 	GLfloat p[box_numVertices][3];
 	GLfloat n[box_numVertices][3];
 	GLfloat t[box_numVertices][2];
@@ -58,4 +62,13 @@ CubeObject::CubeObject(Vector3 Cubescale) :ShapeObject(box_numVertices, box_numI
 	}
 
 	m_Elements = new ShapeElements(box_numVertices, p, n, box_numIndices, f, GL_TRIANGLES);
+
+	//====================================================================
+
+	//使用するシェーダーの用意
+	Shader* tile = new Shader(vert, flag);
+	Material* mat = new Material(tile, ambColor , diffColor, specColor, &shiness);
+
+	//マテリアルの設定(どのシェーダーを使うか)
+	MaterialSet(mat);
 }

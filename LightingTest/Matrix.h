@@ -410,6 +410,13 @@ Matrix &loadmodelTranslate(Quat unitQuat,Vector3 vec){
 	return *this;
 }
 
+Matrix &loadBillboard(){
+	array[0] = array[5] = array[10] = 1.0;
+	array[1] = array[2] = array[4] = array[6] = array[8] = array[9] = 0.0;
+
+	return *this;
+}
+
 //! \brief y ²’†S‚Ì‰ñ“]‚Ì•ÏŠ·s—ñ‚ğŠi”[‚·‚é.
 //!   \param a ‰ñ“]Šp.
 //!   \return İ’è‚µ‚½•ÏŠ·s—ñ.
@@ -762,6 +769,11 @@ Matrix modelTranslate(Quat q,Vector3 v) const
 {
 	Matrix m;
 	return multiply(m.loadmodelTranslate(q,v));
+}
+
+Matrix billBoard(Matrix m) const
+{
+	return m.loadBillboard();
 }
 
 //x²‚É›“x‰ñ“]‚µ‚½Œã‚ÌÀ•W

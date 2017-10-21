@@ -5,26 +5,27 @@ Rect::Rect()
 {
 }
 
-Rect::Rect(GLfloat width, GLfloat height){
+Rect::Rect(GLfloat width, GLfloat height,Vector3 a_pos,bool a_billboard){
 	// 基準となる形状
-	static const GLfloat p[][2] =
+	static const GLfloat p[][3] =
 	{
-		{ -0.5f, -0.5f },
-		{ 0.5f, -0.5f },
-		{ 0.5f, 0.5f },
-		{ -0.5f, 0.5f },
+		{ -0.5f, -0.5f ,0.0f},
+		{ 0.5f, -0.5f ,0.0f},
+		{ 0.5f, 0.5f ,0.0f},
+		{ -0.5f, 0.5f ,0.0f},
 	};
 
-	GLfloat tmpuv[4][2] = {
+	GLfloat tmpuv[6][2] = {
 		{ 0.0f, 1.0f },
 		{ 1.0f, 1.0f },
-		{ 1.0f, 0.0f },
-		{ 0.0f, 1.0f },
+		{ 1.0f,1.0f },
+
+		{ 0.0f, 0.0f },
 	};
 
 	// 作業用のメモリ
-	GLfloat pos[4][3];
 	GLfloat norm[4][3];
+	GLuint f[2][3];
 
 	// 頂点位置と法線ベクトルを求める
 	for (int v = 0; v < 4; ++v)
@@ -39,13 +40,26 @@ Rect::Rect(GLfloat width, GLfloat height){
 		norm[v][0] = 0.0f;
 		norm[v][1] = 0.0f;
 		norm[v][2] = 1.0f;
+	
+		
+	}
+
+	// 頂点位置と法線ベクトルを求める
+	for (int v = 0; v < 6; ++v)
+	{
+		uv[v][0] = tmpuv[v][0];
+		uv[v][1] = tmpuv[v][1];
 	}
 
 	//どの頂点がどの面を表すのか
-	m_faces[0] = 0; m_faces[1] = 1; m_faces[2] = 2;
-	m_faces[3] = 0; m_faces[4] = 3; m_faces[5] = 2;
+	f[1][0] = m_faces[3] = 0; f[1][1] = m_faces[4] = 1; f[1][2] = m_faces[5] = 2;
+	f[0][0] = m_faces[0] = 3; f[0][1] = m_faces[1] = 0; f[0][2] = m_faces[2] = 2;
 
-	mtriangle = new ShapeTriangle(4, m_vertPos, norm, GL_TRIANGLE_FAN);
+	mtriangle = new ShapeElements(4, p, norm, 2, f, GL_TRIANGLES);
+
+	position = a_pos;
+
+	billboard = a_billboard;
 }
 
 Rect::~Rect()
@@ -72,7 +86,7 @@ void Rect::SetMaterial(Material* mat){
 	glBindVertexArray(vao);
 
 	// 頂点の座標値 tv 用のバッファオブジェクト
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vao);
 	glBufferData(GL_ARRAY_BUFFER, sizeof uv, uv, GL_STATIC_DRAW);
 
 	//uvやテクスチャの位置をin変数から参照できるようにセットする
@@ -81,14 +95,35 @@ void Rect::SetMaterial(Material* mat){
 
 void Rect::Draw(){
 	if (mtriangle != NULL && mMaterial != NULL){
-		//使う頂点バッファオブジェクトの指定
-		mtriangle->Use();
 		//使うシェーダとテクスチャの指定
 		mMaterial->m_shader->Use();
 		mMaterial->UseTexture();
+
+		//使う頂点バッファオブジェクトの指定
+		mtriangle->Use();
+
+		Matrix mm;
+		mm.loadIdentity();
+		mm.loadBillboard();
+		mm *= Translate(0, 0, 30);
+
+		Matrix mw;
+		mw.loadIdentity();
+		if (billboard){
+			mw = Window::ReturnMV();
+			mw.loadBillboard();
+			mw *= Translate(0, 0, 30);
+		}
+		else{
+			mw = Window::ReturnMV()*Translate(GetPos().getX(), GetPos().getY(), GetPos().getZ());
+		}
+
 		//配置
-		mMaterial->m_shader->loadMatrix(Window::getMp(), Window::ReturnMV()*Translate(0.0f, 0.0f, 0.0f));
+		mMaterial->m_shader->loadMatrix(Window::getMp(), mw,mm);
 		//描く
 		mtriangle->Draw();
+
+		mMaterial->OffTexture();
+
 	}
 }

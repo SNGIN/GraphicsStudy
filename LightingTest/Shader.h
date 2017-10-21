@@ -25,9 +25,11 @@ struct MaterialLoc
 //変換行列のシェーダーソースでの場所
 struct MatrixLoc
 {
-	GLint mc;
-	GLint mw;
-	GLint mg;         // モデルビュー変換の法線変換行列の uniform 変数の場所
+	GLint modelMatrix;
+	GLint modelViewMatrix;
+	GLint modelViewprojectionMatrix;
+	GLint viewMatrix;
+	GLint normalMatrix;         // モデルビュー変換の法線変換行列の uniform 変数の場所
 };
 
 static GLchar *ReadShaderSource(const char *name);
@@ -73,10 +75,12 @@ public:
 		int nvarying = 0, const char **varyings = 0) :program(LoadShader(vert, frag, geom, nvarying, varyings)){
 		
 		// 変換行列の uniform 変数の場所
-		loc_matrix.mc = glGetUniformLocation(program, "mc");
-		loc_matrix.mw = glGetUniformLocation(program, "mw");
+		loc_matrix.modelViewprojectionMatrix = glGetUniformLocation(program, "modelViewprojectionMatrix");
+		loc_matrix.modelMatrix = glGetUniformLocation(program, "modelMatrix");
+		loc_matrix.viewMatrix = glGetUniformLocation(program, "viewMatrix");
+		loc_matrix.modelViewMatrix = glGetUniformLocation(program, "modelViewMatrix");
 		// 変換行列の uniform 変数の場所
-		loc_matrix.mg = glGetUniformLocation(program, "mg");
+		loc_matrix.normalMatrix = glGetUniformLocation(program, "normalMatrix");
 	}
 
 	//コピーコンストラクタ
@@ -120,7 +124,7 @@ public:
 	}
 
 	//変換行列,mp=投影変換行列 mw モデルビュー変換行列
-	virtual void loadMatrix(Matrix mp, Matrix mw);
+	virtual void loadMatrix(Matrix mp, Matrix mw,Matrix mm);
 
 	virtual void UseSimpleShader(Texture tex){};
 };

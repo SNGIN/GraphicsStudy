@@ -32,10 +32,15 @@ void SimpleImageMaterial::SetTexLoc(){
 }
 
 void SimpleImageMaterial::UseTexture(){
-
+	mtex->Use(texLoc,0);
 	//テクスチャの場所を参照できるようにする
-	glUniform1i(texLoc, 0);
+	/*glUniform1i(texLoc, 0);
 	//テクスチャの結びつけ
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mtex->Get());
+	glBindTexture(GL_TEXTURE_2D, mtex->Get());*/
+}
+
+void SimpleImageMaterial::OffTexture(){
+	mtex->Release();
+	//glBindTexture(GL_TEXTURE_2D, 0);
 }

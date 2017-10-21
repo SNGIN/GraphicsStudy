@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Broadphase.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Contact.cpp" />
@@ -76,6 +77,7 @@
     <ClCompile Include="DynamicObj.cpp" />
     <ClCompile Include="Ending.cpp" />
     <ClCompile Include="Failure.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameSeaquence.cpp" />
     <ClCompile Include="GameSeaquenceController.cpp" />
@@ -110,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="Allocator.h" />
     <ClInclude Include="BallJoint.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Boot.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferBase.h" />
@@ -124,6 +127,7 @@
     <ClInclude Include="DynamicObj.h" />
     <ClInclude Include="Ending.h" />
     <ClInclude Include="Failure.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameSeaquence.h" />
     <ClInclude Include="GameSeaquenceController.h" />
@@ -171,6 +175,8 @@
     <None Include="packages.config" />
     <None Include="lambert.frag" />
     <None Include="lambert.vert" />
+    <None Include="PBR.frag" />
+    <None Include="PBR.vert" />
     <None Include="simpleTex.frag" />
     <None Include="simpleTex.vert" />
     <None Include="Tile.frag" />

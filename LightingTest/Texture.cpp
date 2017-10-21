@@ -9,7 +9,7 @@ Texture::Texture()
 
 Texture::Texture(GLuint tex):texture(tex){}
 
-Texture::Texture(GLsizei width, GLsizei height, GLenum internal = GL_RGBA, GLenum format = GL_RGBA, const GLvoid *image = 0){
+/*Texture::Texture(GLsizei width, GLsizei height, GLenum internal = GL_RGBA, GLenum format = GL_RGBA, const GLubyte *image = 0){
 	//渡されたポインタを使ってテクスチャメモリへ読み込む
 
 	//テクスチャオブジェクトを作る
@@ -18,7 +18,7 @@ Texture::Texture(GLsizei width, GLsizei height, GLenum internal = GL_RGBA, GLenu
 	glBindTexture(GL_TEXTURE_2D, texture);
 	//テクスチャのロード
 	LoadTexture(width, height, internal, format, image);
-}
+}*/
 
 Texture::Texture(char *name, GLenum internal = GL_RGBA){
 	//指定した名前ファイルをテクスチャメモリへ読み込む
@@ -31,55 +31,12 @@ Texture::Texture(char *name, GLenum internal = GL_RGBA){
 	LoadImage(name, internal);
 }
 
-//紐づけを切ってテクスチャを解放
-Texture::~Texture()
-{
-	if (last()){
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glDeleteTextures(1, &texture);
-	}
-}
-
-//使うテクスチャの宣言
-void Texture::Use(GLuint unit=0)const{
-	glActiveTexture(GL_TEXTURE0 + unit);
-	glBindTexture(GL_TEXTURE_2D, texture);
-}
-
-//テクスチャの開放
-void Texture::Release()const{
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE0);
-}
-
-//テクスチャの取得
-GLuint Texture::Get()const{
-	return texture;
-}
-
-//テクスチャのロード
-GLuint Texture::LoadTexture(GLsizei width, GLsizei height, GLenum internal, GLenum format, const GLvoid *image){
-	// アルファチャンネルがついていれば 4 バイト境界に設定する
-	glPixelStorei(GL_UNPACK_ALIGNMENT, (format == GL_BGRA || format == GL_RGBA) ? 4 : 1);
-
-	// テクスチャを割り当てる
-	glTexImage2D(GL_TEXTURE_2D, 0, internal, width, height, 0, format, GL_UNSIGNED_BYTE, image);
-
-	// バイリニア（ミップマップなし），エッジでクランプ
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	return texture;
-}
-
 //tgaファイルをメモリに読む
 GLuint Texture::LoadImage(const char *name, GLenum internal){
 	GLsizei width, height;
 	GLenum format;
 
-	const GLubyte *const image(LoadTGA(name,&width,&height,&format));
+	const GLubyte* image = LoadTGA(name, &width, &height, &format);
 	if (image == NULL)return 0;
 	// internal == 0 なら内部フォーマットを読み込んだファイルに合わせる
 	if (internal == 0)
@@ -215,12 +172,55 @@ GLubyte* Texture::LoadTGA(const char *name, GLsizei *width, GLsizei *height, GLe
 	{
 		std::cerr << "Waring: Can't read image data: " << name << std::endl;
 	}
-
 	// ファイルを閉じる
 	file.close();
 
 	// 画像を読み込んだメモリを返す
 	return buffer;
+}
+
+//紐づけを切ってテクスチャを解放
+Texture::~Texture()
+{
+	if (last()){
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glDeleteTextures(1, &texture);
+	}
+}
+
+//使うテクスチャの宣言
+void Texture::Use(GLuint loc,GLuint unit=0)const{
+	glUniform1i(loc, 0);
+	glActiveTexture(GL_TEXTURE0 + unit);
+	glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+//テクスチャの開放
+void Texture::Release()const{
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE0);
+}
+
+//テクスチャの取得
+GLuint Texture::Get()const{
+	return texture;
+}
+
+//テクスチャのロード
+GLuint Texture::LoadTexture(GLsizei width, GLsizei height, GLenum internal, GLenum format, const GLubyte *image){
+	// アルファチャンネルがついていれば 4 バイト境界に設定する
+	glPixelStorei(GL_UNPACK_ALIGNMENT, (format == GL_BGRA || format == GL_RGBA) ? 4 : 1);
+
+	// テクスチャを割り当てる
+	glTexImage2D(GL_TEXTURE_2D, 0, internal, width, height, 0, format, GL_UNSIGNED_BYTE, image);
+
+	// バイリニア（ミップマップなし），エッジでクランプ
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	return texture;
 }
 
 //TODO:矩形クラスを作る(メンバーにテクスチャクラス、シェーダーくらすを持つ四角形オブジェクラス)

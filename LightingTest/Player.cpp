@@ -26,7 +26,7 @@ Player::Player(Physics* mPhysics)
 	m_sphere = new SphereObject(Vector3(1.0f));
 
 	//使用するシェーダーの用意
-	Shader* simple = new Shader("lambert.vert", "lambert.frag");
+	Shader* simple = new Shader("PBR.vert", "PBR.frag");
 	Material* mat = new Material(simple,ambColor,diffColor,specColor,&shiness);
 
 	//モデルに対するマテリアルの設定(どのシェーダーを使うか)
@@ -81,7 +81,9 @@ DynamicObj* Player::Draw(){
 	Matrix mp = Window::getMp();
 	Matrix mw = mv.modelTranslate(physics->GetRigidBodyState(rigidBodyIndex).m_orientation , Vector3(position.x(),position.y(),position.z()));
 
-	m_sphere->GetMaterial()->GetShader()->loadMatrix(mp, mw);
+	Matrix mm; mm.loadIdentity();
+
+	m_sphere->GetMaterial()->GetShader()->loadMatrix(mp, mw, (mm.modelTranslate(physics->GetRigidBodyState(rigidBodyIndex).m_orientation, Vector3(position.x(), position.y(), position.z()))));
 	glCullFace(GL_BACK);
 	//描画
 	m_sphere->Draw();

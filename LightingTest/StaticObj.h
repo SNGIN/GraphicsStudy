@@ -32,6 +32,9 @@ public:
 	int GetRigidbodyIndex(){
 		return rigidBodyIndex;
 	}
+	Vector3 GetPos(){
+		return physics->GetRigidBodyState(rigidBodyIndex).m_position;
+	}
 
 	virtual StaticObj* Draw(){ return 0; };
 	virtual StaticObj* Update(){ return 0; };

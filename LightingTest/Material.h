@@ -38,7 +38,9 @@ public:
 	virtual void SetLight();
 	virtual void SetMaterial();
 	virtual void UseTexture(){};
+	virtual void OffTexture(){};
 	virtual void SetTexLoc(){};
+	virtual Texture* GetTex(){ return NULL; };
 
 };
 

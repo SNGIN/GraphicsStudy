@@ -14,9 +14,11 @@ uniform vec4 kspec;                                 // 鏡面反射係数
 uniform float kshi;                                 // 輝き係数
 
 // 変換行列
-uniform mat4 modelViewMatrix;                                    // 視点座標系への変換行列
-uniform mat4 modelViewprojectionMatrix;                                    // クリッピング座標系への変換行列
-uniform mat4 normalMatrix;                                    // 法線ベクトルの変換行列
+uniform mat4 modelMatrix; 			//モデル行列(ModelMatrix)
+uniform mat4 modelViewMatrix;		// モデルビュー行列
+uniform mat4 modelViewprojectionMatrix;	   // クリッピング座標系への変換行列
+uniform mat4 viewMatrix;			//ビュー行列
+uniform mat4 normalMatrix;			//法線ベクトルの行列
 
 // 頂点属性
 layout (location = 0) in vec4 pv;                   // ローカル座標系の頂点位置
@@ -27,21 +29,12 @@ out vec4 iamb;                                      // 環境光の反射光強度
 out vec4 idiff;                                     // 拡散反射光強度
 out vec4 ispec;                                     // 鏡面反射光強度
 
-//デプスマップのテクスチャ座標
-out vec4 dtc; 
+out vec3 vViewPosition;	//頂点位置から視点位置までのベクトル
+out vec3 vNormal;			//法線ベクトルの行列で法線変換したもの
 
-void main(void)
-{
+void main(){
+	vViewPosition = -1.0*(modelViewMatrix * pv).xyz;
+	vNormal = (normalMatrix * nv).xyz;
+	gl_Position = modelViewprojectionMatrix * pv;
 
-  vec4 p = modelViewprojectionMatrix * pv;                                 // 視点座標系の頂点の位置
-  vec3 v = -normalize(p.xyz / p.w);                 // 視線ベクトル
-  vec3 l = normalize((pl * p.w - p * pl.w).xyz);    // 光線ベクトル
-  vec3 n = normalize((normalMatrix * nv).xyz);                // 法線ベクトル
-  vec3 h = normalize(l + v);                        // 中間ベクトル
-
-  iamb = kamb * lamb;
-  idiff = max(dot(n, l), 0.0) * kdiff * ldiff;
-  ispec = pow(max(dot(n, h), 0.0), kshi) * kspec * lspec;
-
-  gl_Position = modelViewprojectionMatrix * pv;
 }

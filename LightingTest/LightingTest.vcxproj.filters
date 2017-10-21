@@ -228,6 +228,12 @@
     <ClCompile Include="Shader.cpp">
       <Filter>ソース ファイル\Graphic\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Title.h">
@@ -404,6 +410,12 @@
     <ClInclude Include="ShapeObject.h">
       <Filter>ヘッダー ファイル\Graphic\Object</Filter>
     </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -422,8 +434,14 @@
     <None Include="Tile.vert">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Tile.frag">
+    <None Include="PBR.vert">
       <Filter>Shader</Filter>
+    </None>
+    <None Include="PBR.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Tile.frag">
+      <Filter>ソース ファイル\Common\Input</Filter>
     </None>
   </ItemGroup>
 </Project>

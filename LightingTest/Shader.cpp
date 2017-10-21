@@ -136,12 +136,14 @@ GLuint LoadShader(const char *vert, const char *frag, const char *geom,
 	return program;
 }
 
-void Shader::loadMatrix(Matrix mp, Matrix mw){
+void Shader::loadMatrix(Matrix mp, Matrix mw,Matrix mm){
 	Matrix a = (mp * mw);
 	// •ÏŠ·
-	glUniformMatrix4fv(loc_matrix.mc, 1, GL_FALSE, (mp * mw).get());
-	glUniformMatrix4fv(loc_matrix.mw, 1, GL_FALSE, mw.get());
-	glUniformMatrix4fv(loc_matrix.mg, 1, GL_FALSE, Normal(mw).get());
+	glUniformMatrix4fv(loc_matrix.modelViewprojectionMatrix, 1, GL_FALSE, (mp * mw).get());
+	glUniformMatrix4fv(loc_matrix.modelMatrix, 1, GL_FALSE, (mp * mw).get());
+	glUniformMatrix4fv(loc_matrix.viewMatrix, 1, GL_FALSE, (mp).get());
+	glUniformMatrix4fv(loc_matrix.modelViewMatrix, 1, GL_FALSE, mw.get());
+	glUniformMatrix4fv(loc_matrix.normalMatrix, 1, GL_FALSE, Normal(mw).get());
 }
 
 static GLboolean printShaderInfoLog(GLuint shader, const char *str)
